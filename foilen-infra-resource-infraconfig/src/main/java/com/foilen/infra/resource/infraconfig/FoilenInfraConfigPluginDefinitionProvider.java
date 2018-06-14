@@ -24,7 +24,16 @@ public class FoilenInfraConfigPluginDefinitionProvider implements IPPluginDefini
         pluginDefinitionV1.addCustomResource(InfraConfig.class, "Infrastructure Configuration", //
                 Arrays.asList(), //
                 Arrays.asList());
+        pluginDefinitionV1.addCustomResource(InfraConfigPlugin.class, "Infrastructure Plugin", //
+                Arrays.asList(InfraConfigPlugin.PROPERTY_URL), //
+                Arrays.asList());
 
+        // Resource editors
+        pluginDefinitionV1.addTranslations("/com/foilen/infra/resource/infraconfig/messages");
+        pluginDefinitionV1.addResourceEditor(new InfraConfigEditor(), InfraConfigEditor.EDITOR_NAME);
+        pluginDefinitionV1.addResourceEditor(new InfraConfigPluginEditor(), InfraConfigPluginEditor.EDITOR_NAME);
+
+        // Updater Handler
         pluginDefinitionV1.addUpdateHandler(new InfraConfigUpdateHandler());
 
         return pluginDefinitionV1;

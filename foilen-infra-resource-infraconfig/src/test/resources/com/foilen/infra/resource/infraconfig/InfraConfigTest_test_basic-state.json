@@ -1,0 +1,330 @@
+{
+  "resources" : [ {
+    "resource" : "Application | commonserver | ",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "RUN_AS",
+      "to" : "UnixUser | mariadb | /home/mariadb"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationDefinition\" : {\n    \"_nextAssetId\" : 2,\n    \"assetsBundles\" : [ {\n      \"assetsFolderPath\" : \"_assets_1/\",\n      \"assetsRelativePathAndBinaryContent\" : [ ],\n      \"assetsRelativePathAndTextContent\" : [ {\n        \"a\" : \"/newPass\",\n        \"b\" : \"masterqwerty\"\n      }, {\n        \"a\" : \"/newPass.cnf\",\n        \"b\" : \"[client]\\npassword=masterqwerty\"\n      } ]\n    } ],\n    \"assetsPathAndContent\" : [ ],\n    \"buildSteps\" : [ {\n      \"step\" : \"_assets_1/ /\",\n      \"type\" : \"COPY\"\n    } ],\n    \"command\" : null,\n    \"containerUsersToChangeId\" : [ {\n      \"a\" : \"mysql\",\n      \"b\" : 2000\n    } ],\n    \"copyWhenStartedPathAndContentFiles\" : [ {\n      \"a\" : \"/manager-config.json\",\n      \"b\" : \"{\\n  \\\"admin\\\" : {\\n    \\\"name\\\" : \\\"root\\\",\\n    \\\"password\\\" : \\\"masterqwerty\\\"\\n  },\\n  \\\"databases\\\" : [ \\\"logindb\\\", \\\"uidb\\\" ],\\n  \\\"usersToIgnore\\\" : [ {\\n    \\\"name\\\" : \\\"root\\\",\\n    \\\"host\\\" : \\\"%\\\"\\n  } ],\\n  \\\"usersPermissions\\\" : [ {\\n    \\\"name\\\" : \\\"loginuser\\\",\\n    \\\"host\\\" : \\\"%\\\",\\n    \\\"password\\\" : \\\"qwerty\\\",\\n    \\\"databaseGrants\\\" : [ {\\n      \\\"databaseName\\\" : \\\"logindb\\\",\\n      \\\"grants\\\" : [ \\\"ALTER\\\", \\\"CREATE\\\", \\\"CREATE ROUTINE\\\", \\\"CREATE TEMPORARY TABLES\\\", \\\"CREATE VIEW\\\", \\\"DROP\\\", \\\"EVENT\\\", \\\"INDEX\\\", \\\"LOCK TABLES\\\", \\\"SHOW VIEW\\\", \\\"TRIGGER\\\", \\\"SELECT\\\", \\\"INSERT\\\", \\\"UPDATE\\\", \\\"DELETE\\\" ]\\n    } ]\\n  }, {\\n    \\\"name\\\" : \\\"uiuser\\\",\\n    \\\"host\\\" : \\\"%\\\",\\n    \\\"password\\\" : \\\"qwerty\\\",\\n    \\\"databaseGrants\\\" : [ {\\n      \\\"databaseName\\\" : \\\"uidb\\\",\\n      \\\"grants\\\" : [ \\\"ALTER\\\", \\\"CREATE\\\", \\\"CREATE ROUTINE\\\", \\\"CREATE TEMPORARY TABLES\\\", \\\"CREATE VIEW\\\", \\\"DROP\\\", \\\"EVENT\\\", \\\"INDEX\\\", \\\"LOCK TABLES\\\", \\\"SHOW VIEW\\\", \\\"TRIGGER\\\", \\\"SELECT\\\", \\\"INSERT\\\", \\\"UPDATE\\\", \\\"DELETE\\\" ]\\n    } ]\\n  } ]\\n}\"\n    } ],\n    \"entrypoint\" : null,\n    \"environments\" : { },\n    \"executeWhenStartedCommands\" : [ \"/mariadb-update-manager.sh\" ],\n    \"from\" : \"foilen/fcloud-docker-mariadb:10.3.5-1.1.0-001\",\n    \"hostToIpMapping\" : [ ],\n    \"portsEndpoint\" : {\n      \"3306\" : \"MYSQL_TCP\"\n    },\n    \"portsExposed\" : { },\n    \"portsRedirect\" : [ ],\n    \"runAs\" : 2000,\n    \"services\" : [ {\n      \"command\" : \"/mariadb-start.sh\",\n      \"name\" : \"app\",\n      \"runAs\" : null,\n      \"workingDirectory\" : null\n    } ],\n    \"udpPortsExposed\" : { },\n    \"volumes\" : [ {\n      \"containerFsFolder\" : \"/var/lib/mysql\",\n      \"groupId\" : 2000,\n      \"hostFolder\" : \"/home/mariadb/mysql/commonserver/data\",\n      \"ownerId\" : 2000,\n      \"permissions\" : \"770\"\n    }, {\n      \"containerFsFolder\" : \"/var/run/mysqld/\",\n      \"groupId\" : 2000,\n      \"hostFolder\" : \"/home/mariadb/mysql/commonserver/run\",\n      \"ownerId\" : 2000,\n      \"permissions\" : \"770\"\n    }, {\n      \"containerFsFolder\" : \"/volumes/config/\",\n      \"groupId\" : 2000,\n      \"hostFolder\" : \"/home/mariadb/mysql/commonserver/config\",\n      \"ownerId\" : 2000,\n      \"permissions\" : \"770\"\n    } ],\n    \"workingDirectory\" : null\n  },\n  \"description\" : \"\",\n  \"domainNames\" : [ ],\n  \"executionCronDetails\" : null,\n  \"executionPolicy\" : \"ALWAYS_ON\",\n  \"name\" : \"commonserver\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"commonserver\"\n}"
+  }, {
+    "resource" : "Application | infra_login | Login service",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "RUN_AS",
+      "to" : "UnixUser | login | /home/login"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationDefinition\" : {\n    \"_nextAssetId\" : 2,\n    \"assetsBundles\" : [ {\n      \"assetsFolderPath\" : \"_assets_1/\",\n      \"assetsRelativePathAndBinaryContent\" : [ ],\n      \"assetsRelativePathAndTextContent\" : [ {\n        \"a\" : \"/login_config.json\",\n        \"b\" : \"{\\n  \\\"administratorEmail\\\" : \\\"adminlogin@example.com\\\",\\n  \\\"applicationId\\\" : \\\"infra\\\",\\n  \\\"cookieDateName\\\" : \\\"login_date\\\",\\n  \\\"cookieSignatureName\\\" : \\\"login_signature\\\",\\n  \\\"cookieSignatureSalt\\\" : \\\"DDDEEEFFF\\\",\\n  \\\"cookieUserName\\\" : \\\"login_username\\\",\\n  \\\"csrfSalt\\\" : \\\"AAABBBCCC\\\",\\n  \\\"fromEmail\\\" : \\\"fromlogin@example.com\\\",\\n  \\\"loginBaseUrl\\\" : \\\"https://login.example.com\\\",\\n  \\\"mysqlDatabaseName\\\" : \\\"logindb\\\",\\n  \\\"mysqlDatabasePassword\\\" : \\\"qwerty\\\",\\n  \\\"mysqlDatabaseUserName\\\" : \\\"loginuser\\\",\\n  \\\"mysqlHostName\\\" : \\\"127.0.0.1\\\",\\n  \\\"mysqlPort\\\" : 3306\\n}\"\n      } ]\n    } ],\n    \"assetsPathAndContent\" : [ ],\n    \"buildSteps\" : [ {\n      \"step\" : \"_assets_1/ /\",\n      \"type\" : \"COPY\"\n    } ],\n    \"command\" : \"java -jar foilen-login.jar\",\n    \"containerUsersToChangeId\" : [ ],\n    \"copyWhenStartedPathAndContentFiles\" : [ ],\n    \"entrypoint\" : null,\n    \"environments\" : {\n      \"CONFIG_FILE\" : \"/login_config.json\"\n    },\n    \"executeWhenStartedCommands\" : [ ],\n    \"from\" : \"foilen/foilen-login:0.2.1\",\n    \"hostToIpMapping\" : [ ],\n    \"portsEndpoint\" : {\n      \"14010\" : \"HTTP_TCP\"\n    },\n    \"portsExposed\" : { },\n    \"portsRedirect\" : [ {\n      \"localPort\" : 3306,\n      \"machineContainerEndpoint\" : \"m1.example.com/commonserver/MYSQL_TCP\",\n      \"toContainerName\" : \"commonserver\",\n      \"toEndpoint\" : \"MYSQL_TCP\",\n      \"toLocalMachine\" : false,\n      \"toMachine\" : \"m1.example.com\"\n    } ],\n    \"runAs\" : 2001,\n    \"services\" : [ ],\n    \"udpPortsExposed\" : { },\n    \"volumes\" : [ ],\n    \"workingDirectory\" : \"/app\"\n  },\n  \"description\" : \"Login service\",\n  \"domainNames\" : [ ],\n  \"executionCronDetails\" : null,\n  \"executionPolicy\" : \"ALWAYS_ON\",\n  \"name\" : \"infra_login\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"Login service\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_login\"\n}"
+  }, {
+    "resource" : "Application | infra_ui | UI service",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "RUN_AS",
+      "to" : "UnixUser | ui | /home/ui"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationDefinition\" : {\n    \"_nextAssetId\" : 2,\n    \"assetsBundles\" : [ {\n      \"assetsFolderPath\" : \"_assets_1/\",\n      \"assetsRelativePathAndBinaryContent\" : [ ],\n      \"assetsRelativePathAndTextContent\" : [ {\n        \"a\" : \"/ui_config.json\",\n        \"b\" : \"{\\n  \\\"baseUrl\\\" : \\\"https://ui.example.com\\\",\\n  \\\"csrfSalt\\\" : \\\"ZZZYYYXXX\\\",\\n  \\\"loginConfigDetails\\\" : {\\n    \\\"appId\\\" : \\\"infra\\\",\\n    \\\"baseUrl\\\" : \\\"https://login.example.com\\\",\\n    \\\"certFile\\\" : null,\\n    \\\"certText\\\" : \\\"-----BEGIN CERTIFICATE-----\\\\nMIIE0zCCArugAwIBAgIBATANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFsb2dp\\\\nbi5leGFtcGxlLmNvbTAeFw0xODA2MTMyMDEyMjlaFw0xODA3MTMyMDEyMjlaMBwx\\\\nGjAYBgNVBAMMEWxvZ2luLmV4YW1wbGUuY29tMIICIjANBgkqhkiG9w0BAQEFAAOC\\\\nAg8AMIICCgKCAgEAmD6+w8GwggdZtnVa5LTT9cpgITPaOU+pLhNLCweWn+iJueyN\\\\nc1sVzzbA92gPBDx9+pr4aoJyhF/CMxu5hBygm0I5oNNbFEcGkVELEIfhb9uSNRem\\\\nr1m7+0ndrbCiP9LjkWhPnPo88hUAq8VyseW34Kdwk9rgB1tsE9beG5ukwJzy6VLo\\\\nLcxg5Ts3QWu6EQnJZfzRtdRC8FiOyluMNF12NI5iqiQZ3LOaHNIAHLoZFgdiYnT0\\\\nL3qiuE15FBRXsq+RDnj9j9uWB0QOt0BFWwoOtuQzO9Q90l1v3+iXXNYafoYPDjyx\\\\nCGeGJtq6ArZ5MYVbyL5FwkF/1MjH6YSOsgMLjEzMU8lDI+NbXyghlgkdq3BqQT/O\\\\n1Llm7DCddUcu/CjPF5bU8goEQqrxQSZ1vzA/okPjRfkV9lGHAemTURSONQLaYAtm\\\\noEi3Iq7kBC6DvyNeHZzh46ESZp/tBH0qEwqEYtKb0YwxDh+kF68s4sBJMl06S2dZ\\\\newN6y2VPguLNjFkRND2PLTQDlb6E2wR7UWC7p57z9iiqRkV5QoZuUJe9Dwh/Wx32\\\\nNyE5NO2EpmnLxXknFuLH1DjDfU+TcHTaTI12SOIpFszEiwsoYhHHKJx1PXQG8yt1\\\\nPo5/D8LABZ4QoP+7yvm21wEBZqd8uPsjJSvXTdGzmRMJLXmsOo78DhgAYHcCAwEA\\\\nAaMgMB4wHAYDVR0RBBUwE4IRbG9naW4uZXhhbXBsZS5jb20wDQYJKoZIhvcNAQEL\\\\nBQADggIBADVIPICNmP8XlQkgYRnW2+HMFgSdEmrznic/FZxp5djPtzIIvYNkygrV\\\\n7KgBujGaM/Lz062o+la1tts8MTNwo1MnxXS200CITvF5KPuWgySQWCbB0W3MVUu6\\\\nBe4HJ+GGVE4EAPBu7zl9boM77yaB89UPEpqTPFMVcb+2/l5SqZOohl3jR297KCo7\\\\nzqElIqZ0HQaJ2fg3e3ppCBKTDYpNTkoKy/CLgBZJTHWb8N9u28w6/gSlHKxQafgQ\\\\nr0sygZPJX9uDraJ6Yq1sWzZ1df2GtBwAeiM81MwW3lXa7s91gqfCu4doZYGJxKYA\\\\nzGittzgs6mxP0KC+YFLsu9mlR8t+USMnhcXD3F/zS9jY+Fun/A0x5pqbu/gwWcS6\\\\nELvA4pcZBsaniV+Kdc/vRPM0+YLMZ+RX7xnNqzaMUO4pKdPZZ2Y9a3qiAlEJtPcX\\\\n4/TH2J/UxfpDHTIKwNDnBqfE8d5i8mcEHephqI2zU++JHyMx/EMIMf7oQJ5YMmnx\\\\nbtahMD33W123sboJJIcvIDjnMxH0z8IGIltyLARl4BjDKrIy3tj2NleDxUCXl3/4\\\\n5M65wcaFxjAIbSonGw4Rgtl50U/5MOe7pbrd1bJZrZhMzu0CaZsULlKI0nppog4g\\\\n4bqT/INCICc3UmtNeyIhE3csWC/UrsOSCqKV8KAVMalJRBKRafqq\\\\n-----END CERTIFICATE-----\\\\n\\\"\\n  },\\n  \\\"loginCookieSignatureSalt\\\" : \\\"WWWVVVUUU\\\",\\n  \\\"mailAlertsTo\\\" : \\\"alertsui@example.com\\\",\\n  \\\"mailFrom\\\" : \\\"fromui@example.com\\\",\\n  \\\"mailHost\\\" : \\\"127.0.0.1\\\",\\n  \\\"mailPassword\\\" : null,\\n  \\\"mailPort\\\" : 25,\\n  \\\"mailUsername\\\" : null,\\n  \\\"mysqlDatabaseName\\\" : \\\"uidb\\\",\\n  \\\"mysqlDatabasePassword\\\" : \\\"qwerty\\\",\\n  \\\"mysqlDatabaseUserName\\\" : \\\"uiuser\\\",\\n  \\\"mysqlHostName\\\" : \\\"127.0.0.1\\\",\\n  \\\"mysqlPort\\\" : 3306\\n}\"\n      } ]\n    } ],\n    \"assetsPathAndContent\" : [ ],\n    \"buildSteps\" : [ {\n      \"step\" : \"_assets_1/ /\",\n      \"type\" : \"COPY\"\n    }, {\n      \"step\" : \"mkdir /plugins/\",\n      \"type\" : \"COMMAND\"\n    }, {\n      \"step\" : \"curl -L https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar -o tmp && echo 7cb36a42730514aa09bd9fea97185e65a4755bc65c392a9ba78c451acfd35faf8a639a16a66cf567a503c6ecff78a4df5229155ceb2b126d581ebb8315421f58 tmp > tmp.sha512 && sha512sum -c tmp.sha512 && rm tmp.sha512 && mv tmp foilen-infra-resource-dns-0.1.0.jar\",\n      \"type\" : \"COMMAND\"\n    } ],\n    \"command\" : \"java -jar /app/foilen-infra-ui.jar\",\n    \"containerUsersToChangeId\" : [ ],\n    \"copyWhenStartedPathAndContentFiles\" : [ ],\n    \"entrypoint\" : [ ],\n    \"environments\" : {\n      \"CONFIG_FILE\" : \"/ui_config.json\",\n      \"PLUGINS_JARS\" : \"/plugins/\"\n    },\n    \"executeWhenStartedCommands\" : [ ],\n    \"from\" : \"foilen/foilen-infra-ui:0.1.1\",\n    \"hostToIpMapping\" : [ ],\n    \"portsEndpoint\" : {\n      \"8080\" : \"HTTP_TCP\"\n    },\n    \"portsExposed\" : { },\n    \"portsRedirect\" : [ {\n      \"localPort\" : 3306,\n      \"machineContainerEndpoint\" : \"m1.example.com/commonserver/MYSQL_TCP\",\n      \"toContainerName\" : \"commonserver\",\n      \"toEndpoint\" : \"MYSQL_TCP\",\n      \"toLocalMachine\" : false,\n      \"toMachine\" : \"m1.example.com\"\n    } ],\n    \"runAs\" : 2002,\n    \"services\" : [ ],\n    \"udpPortsExposed\" : { },\n    \"volumes\" : [ ],\n    \"workingDirectory\" : null\n  },\n  \"description\" : \"UI service\",\n  \"domainNames\" : [ ],\n  \"executionCronDetails\" : null,\n  \"executionPolicy\" : \"ALWAYS_ON\",\n  \"name\" : \"infra_ui\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"UI service\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_ui\"\n}"
+  }, {
+    "resource" : "Application | infra_web-m1_example_com | Web HA Proxy for m1.example.com",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "RUN_AS",
+      "to" : "UnixUser | infra_web | /home/infra_web"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationDefinition\" : {\n    \"_nextAssetId\" : 2,\n    \"assetsBundles\" : [ {\n      \"assetsFolderPath\" : \"_assets_1/\",\n      \"assetsRelativePathAndBinaryContent\" : [ ],\n      \"assetsRelativePathAndTextContent\" : [ {\n        \"a\" : \"/certs/login.example.com.pem\",\n        \"b\" : \"-----BEGIN CERTIFICATE-----\\nMIIE0zCCArugAwIBAgIBATANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFsb2dp\\nbi5leGFtcGxlLmNvbTAeFw0xODA2MTMyMDEyMjlaFw0xODA3MTMyMDEyMjlaMBwx\\nGjAYBgNVBAMMEWxvZ2luLmV4YW1wbGUuY29tMIICIjANBgkqhkiG9w0BAQEFAAOC\\nAg8AMIICCgKCAgEAmD6+w8GwggdZtnVa5LTT9cpgITPaOU+pLhNLCweWn+iJueyN\\nc1sVzzbA92gPBDx9+pr4aoJyhF/CMxu5hBygm0I5oNNbFEcGkVELEIfhb9uSNRem\\nr1m7+0ndrbCiP9LjkWhPnPo88hUAq8VyseW34Kdwk9rgB1tsE9beG5ukwJzy6VLo\\nLcxg5Ts3QWu6EQnJZfzRtdRC8FiOyluMNF12NI5iqiQZ3LOaHNIAHLoZFgdiYnT0\\nL3qiuE15FBRXsq+RDnj9j9uWB0QOt0BFWwoOtuQzO9Q90l1v3+iXXNYafoYPDjyx\\nCGeGJtq6ArZ5MYVbyL5FwkF/1MjH6YSOsgMLjEzMU8lDI+NbXyghlgkdq3BqQT/O\\n1Llm7DCddUcu/CjPF5bU8goEQqrxQSZ1vzA/okPjRfkV9lGHAemTURSONQLaYAtm\\noEi3Iq7kBC6DvyNeHZzh46ESZp/tBH0qEwqEYtKb0YwxDh+kF68s4sBJMl06S2dZ\\newN6y2VPguLNjFkRND2PLTQDlb6E2wR7UWC7p57z9iiqRkV5QoZuUJe9Dwh/Wx32\\nNyE5NO2EpmnLxXknFuLH1DjDfU+TcHTaTI12SOIpFszEiwsoYhHHKJx1PXQG8yt1\\nPo5/D8LABZ4QoP+7yvm21wEBZqd8uPsjJSvXTdGzmRMJLXmsOo78DhgAYHcCAwEA\\nAaMgMB4wHAYDVR0RBBUwE4IRbG9naW4uZXhhbXBsZS5jb20wDQYJKoZIhvcNAQEL\\nBQADggIBADVIPICNmP8XlQkgYRnW2+HMFgSdEmrznic/FZxp5djPtzIIvYNkygrV\\n7KgBujGaM/Lz062o+la1tts8MTNwo1MnxXS200CITvF5KPuWgySQWCbB0W3MVUu6\\nBe4HJ+GGVE4EAPBu7zl9boM77yaB89UPEpqTPFMVcb+2/l5SqZOohl3jR297KCo7\\nzqElIqZ0HQaJ2fg3e3ppCBKTDYpNTkoKy/CLgBZJTHWb8N9u28w6/gSlHKxQafgQ\\nr0sygZPJX9uDraJ6Yq1sWzZ1df2GtBwAeiM81MwW3lXa7s91gqfCu4doZYGJxKYA\\nzGittzgs6mxP0KC+YFLsu9mlR8t+USMnhcXD3F/zS9jY+Fun/A0x5pqbu/gwWcS6\\nELvA4pcZBsaniV+Kdc/vRPM0+YLMZ+RX7xnNqzaMUO4pKdPZZ2Y9a3qiAlEJtPcX\\n4/TH2J/UxfpDHTIKwNDnBqfE8d5i8mcEHephqI2zU++JHyMx/EMIMf7oQJ5YMmnx\\nbtahMD33W123sboJJIcvIDjnMxH0z8IGIltyLARl4BjDKrIy3tj2NleDxUCXl3/4\\n5M65wcaFxjAIbSonGw4Rgtl50U/5MOe7pbrd1bJZrZhMzu0CaZsULlKI0nppog4g\\n4bqT/INCICc3UmtNeyIhE3csWC/UrsOSCqKV8KAVMalJRBKRafqq\\n-----END CERTIFICATE-----\\n-----BEGIN RSA PRIVATE KEY-----\\n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\\n-----END RSA PRIVATE KEY-----\\n\"\n      }, {\n        \"a\" : \"/certs/ui.example.com.pem\",\n        \"b\" : \"-----BEGIN CERTIFICATE-----\\nMIIEyjCCArKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAZMRcwFQYDVQQDDA51aS5l\\neGFtcGxlLmNvbTAeFw0xODA2MTMyMDEyNTVaFw0xODA3MTMyMDEyNTVaMBkxFzAV\\nBgNVBAMMDnVpLmV4YW1wbGUuY29tMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIIC\\nCgKCAgEArUAJhkOYtQQXx1bCZ05EbzdXjOSHwxc8yeaOiBBzGJqYLPbAOnSwXR6q\\ndgeJzFjkGkN2ue5lRM8RM7bAvWOvJVrRT1MnKg2hD311WdyIwfr/uWk54MwBh7nK\\n/kdYcNliZ0gc3Lyj6zh6onZtQ60bYpqCuj/KYJWDUEEakN91k4/EyxV6U+Js6+sV\\n6uux8wDP4mFxAtLtNj4zLzXAo+gzf++7KbHvm2nJfoAl9jrSRVLdtNew8njVO595\\nZSjHeyK9lUkjcBh7Sq0bpaID5iMe3MeidewBQFNAeeJRUCF/AYMds90pY/6c8eb5\\nskxDwE8wjMuMvdBRhsQVuOcm17LUMuSkT43OlZJLXSzcD3tq0Nl8BimsCR3Wv/f9\\n5lV+EzwSfn3GmRikT/dDBk88P2ixj+WEwE2B50OW0jVtTZ12wZdFKLR3U9mWRPEr\\nxVZujOrGhGvL4XCWxDCHXZ3OYaFldVZZrd7ZkLlAc0gT3qH0K9H0JKnrN5v6IRVH\\n8P7/Gpt6Loz72gaiFck8WCIWm7QMYmlUfnzMZqNPXSkXG8E9RBs2I44wS5lS1EJn\\nSCxK8tfgnNcVNjkUW6W9oJM6808IycCfn15pPuC4exSWNpRb+YssBldbafaukX9M\\nA+E4pQk8mU/pYzPTrkKKUTY7wYJLQfciJQ1sk2YChKWTDj3PsWUCAwEAAaMdMBsw\\nGQYDVR0RBBIwEIIOdWkuZXhhbXBsZS5jb20wDQYJKoZIhvcNAQELBQADggIBAJ0T\\nxSoS9BQWM+sRg7Yb8AnxnzEqX5utNZ+ba4IhzzN3E/rBxaFnCKiDXmSWXkyZsbTS\\nRemUgpk5pqLxYC2QJ1MdRPdeQqgy2n07ilA2d18BATqsUACgYMvs5tfpge3VlJ79\\nq9XOTyK7EKUkck47C+Okwiw4msS47nKwA+AsPS5E4Xg/tTSVNOrgdlKAqeBhIyXH\\nzqi6jESBXD5sPuOMGpcFH+HNE/KNsuRHtoWhBVVOoWixWNy/HkNtMdBl/ibeSBqI\\ninxu9dJquFZADkfNkpW61T0DLML6F0dQJs1A78gj1TxqdvtZcx21Q2MminPdr6+c\\n/zUZ9pGAaXvKxnLuFeWSGoasMqGD6SVQAzlq0du653cVNxy07jrB0lod8HV3judk\\n6kshhf4OwAyDJQPx42ywPwZmxAiPaN2kWVvj9eloKcnjAKlX5QYUg6yLqYQHP75h\\nUS0c5LF+491vXk0pQ/vcNYZSy7wLQjGPOVIdEjs3IQ2majFpyLYEhAHskFNBsCUF\\nH2IploDhmp72dyQMt/3Oqu23oLOFV4f1r3qd0zkzQ06OwcdJEKXuXQTypkqH30wa\\nVlhC4/4a2C/9Svd50JhQuUaaExqCzo3mthBnd22bmrHvDbcTCygYNxozTdMbvWlr\\nuv3kL4JTDKv2nqgWokl+v6iM2Y1EuNxnKt7hvG7C\\n-----END CERTIFICATE-----\\n-----BEGIN RSA PRIVATE KEY-----\\n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\\n-----END RSA PRIVATE KEY-----\\n\"\n      }, {\n        \"a\" : \"/haproxy.cfg\",\n        \"b\" : \"global\\n  user haproxy\\n  group haproxy\\n  tune.ssl.default-dh-param 1024\\n\\ndefaults\\n  timeout connect 5000\\n  timeout client 50000\\n  timeout server 50000\\n\\nfrontend port_4433\\n  mode http\\n  option forwardfor\\n  option http-server-close\\n  bind *:4433 ssl crt /certs\\n  reqadd X-Forwarded-Proto:\\\\ https\\n\\n  use_backend https_4433_login.example.com if { ssl_fc_sni login.example.com }\\n  use_backend https_4433_ui.example.com if { ssl_fc_sni ui.example.com }\\n\\nbackend https_4433_login.example.com\\n  option httpclose\\n  option forwardfor\\n  mode http\\n  server https_4433_login.example.com_1 127.0.0.1:10000 check\\n\\nbackend https_4433_ui.example.com\\n  option httpclose\\n  option forwardfor\\n  mode http\\n  server https_4433_ui.example.com_1 127.0.0.1:10001 check\\n\\n\"\n      } ]\n    } ],\n    \"assetsPathAndContent\" : [ ],\n    \"buildSteps\" : [ {\n      \"step\" : \"_assets_1/ /\",\n      \"type\" : \"COPY\"\n    } ],\n    \"command\" : null,\n    \"containerUsersToChangeId\" : [ {\n      \"a\" : \"haproxy\",\n      \"b\" : 2003\n    } ],\n    \"copyWhenStartedPathAndContentFiles\" : [ ],\n    \"entrypoint\" : null,\n    \"environments\" : { },\n    \"executeWhenStartedCommands\" : [ ],\n    \"from\" : \"foilen/fcloud-docker-haproxy:1.6.3-002\",\n    \"hostToIpMapping\" : [ ],\n    \"portsEndpoint\" : { },\n    \"portsExposed\" : {\n      \"80\" : 8080,\n      \"443\" : 4433\n    },\n    \"portsRedirect\" : [ {\n      \"localPort\" : 10000,\n      \"machineContainerEndpoint\" : \"localhost/infra_login/HTTP_TCP\",\n      \"toContainerName\" : \"infra_login\",\n      \"toEndpoint\" : \"HTTP_TCP\",\n      \"toLocalMachine\" : true,\n      \"toMachine\" : \"localhost\"\n    }, {\n      \"localPort\" : 10001,\n      \"machineContainerEndpoint\" : \"localhost/infra_ui/HTTP_TCP\",\n      \"toContainerName\" : \"infra_ui\",\n      \"toEndpoint\" : \"HTTP_TCP\",\n      \"toLocalMachine\" : true,\n      \"toMachine\" : \"localhost\"\n    } ],\n    \"runAs\" : 2003,\n    \"services\" : [ {\n      \"command\" : \"/usr/sbin/haproxy -f /haproxy.cfg\",\n      \"name\" : \"haproxy\",\n      \"runAs\" : null,\n      \"workingDirectory\" : null\n    } ],\n    \"udpPortsExposed\" : { },\n    \"volumes\" : [ ],\n    \"workingDirectory\" : null\n  },\n  \"description\" : \"Web HA Proxy for m1.example.com\",\n  \"domainNames\" : [ ],\n  \"executionCronDetails\" : null,\n  \"executionPolicy\" : \"ALWAYS_ON\",\n  \"name\" : \"infra_web-m1_example_com\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"Web HA Proxy for m1.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_web-m1_example_com\"\n}"
+  }, {
+    "resource" : "DnsEntry | login.example.com / A | 127.0.0.1",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | login.example.com | Domain for login.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"details\" : \"127.0.0.1\",\n  \"name\" : \"login.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"127.0.0.1\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"login.example.com / A\",\n  \"type\" : \"A\"\n}"
+  }, {
+    "resource" : "DnsEntry | m1.example.com / A | 127.0.0.1",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | m1.example.com | Domain for m1.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"details\" : \"127.0.0.1\",\n  \"name\" : \"m1.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"127.0.0.1\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"m1.example.com / A\",\n  \"type\" : \"A\"\n}"
+  }, {
+    "resource" : "DnsEntry | ui.example.com / A | 127.0.0.1",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | ui.example.com | Domain for ui.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"details\" : \"127.0.0.1\",\n  \"name\" : \"ui.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"127.0.0.1\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"ui.example.com / A\",\n  \"type\" : \"A\"\n}"
+  }, {
+    "resource" : "DnsPointer | login.example.com | login.example.com",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "DnsEntry | login.example.com / A | 127.0.0.1"
+    }, {
+      "type" : "POINTS_TO",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"login.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"login.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"login.example.com\"\n}"
+  }, {
+    "resource" : "DnsPointer | ui.example.com | ui.example.com",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "DnsEntry | ui.example.com / A | 127.0.0.1"
+    }, {
+      "type" : "POINTS_TO",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"ui.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"ui.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"ui.example.com\"\n}"
+  }, {
+    "resource" : "Domain | example.com | Domain for example.com",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Domain for example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"example.com\",\n  \"reverseName\" : \"com.example\"\n}"
+  }, {
+    "resource" : "Domain | login.example.com | Domain for login.example.com",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | example.com | Domain for example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"login.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Domain for login.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"login.example.com\",\n  \"reverseName\" : \"com.example.login\"\n}"
+  }, {
+    "resource" : "Domain | m1.example.com | Domain for m1.example.com",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | example.com | Domain for example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"m1.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Domain for m1.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"m1.example.com\",\n  \"reverseName\" : \"com.example.m1\"\n}"
+  }, {
+    "resource" : "Domain | ui.example.com | Domain for ui.example.com",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | example.com | Domain for example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"ui.example.com\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Domain for ui.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"ui.example.com\",\n  \"reverseName\" : \"com.example.ui\"\n}"
+  }, {
+    "resource" : "InfraConfig | Infrastructure Configuration | Basic Infrastructure (login and UI)",
+    "links" : [ {
+      "type" : "LOGIN_INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "LOGIN_USES",
+      "to" : "MariaDBDatabase | logindb | "
+    }, {
+      "type" : "LOGIN_USES",
+      "to" : "MariaDBServer | commonserver | "
+    }, {
+      "type" : "LOGIN_USES",
+      "to" : "MariaDBUser | loginuser | "
+    }, {
+      "type" : "LOGIN_USES",
+      "to" : "UnixUser | login | /home/login"
+    }, {
+      "type" : "LOGIN_USES",
+      "to" : "WebsiteCertificate | login.example.com | 3db0fbf94792b7eb21db1652e0566f7d2b5904e9, 2018-06-13, 2018-07-13"
+    }, {
+      "type" : "MANAGES",
+      "to" : "Application | infra_login | Login service"
+    }, {
+      "type" : "MANAGES",
+      "to" : "Application | infra_ui | UI service"
+    }, {
+      "type" : "MANAGES",
+      "to" : "Website | infra_login | login.example.com"
+    }, {
+      "type" : "MANAGES",
+      "to" : "Website | infra_ui | ui.example.com"
+    }, {
+      "type" : "UI_INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "UI_USES",
+      "to" : "InfraConfigPlugin | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar -> 7cb36a42730514aa09bd9fea97185e65a4755bc65c392a9ba78c451acfd35faf8a639a16a66cf567a503c6ecff78a4df5229155ceb2b126d581ebb8315421f58"
+    }, {
+      "type" : "UI_USES",
+      "to" : "MariaDBDatabase | uidb | "
+    }, {
+      "type" : "UI_USES",
+      "to" : "MariaDBServer | commonserver | "
+    }, {
+      "type" : "UI_USES",
+      "to" : "MariaDBUser | uiuser | qwerty"
+    }, {
+      "type" : "UI_USES",
+      "to" : "UnixUser | ui | /home/ui"
+    }, {
+      "type" : "UI_USES",
+      "to" : "WebsiteCertificate | ui.example.com | 1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629, 2018-06-13, 2018-07-13"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationId\" : \"infra\",\n  \"loginAdministratorEmail\" : \"adminlogin@example.com\",\n  \"loginCookieSignatureSalt\" : \"DDDEEEFFF\",\n  \"loginCsrfSalt\" : \"AAABBBCCC\",\n  \"loginDomainName\" : \"login.example.com\",\n  \"loginEmailFrom\" : \"fromlogin@example.com\",\n  \"loginVersion\" : \"0.2.1\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"Basic Infrastructure (login and UI)\",\n  \"resourceEditorName\" : \"Infrastructure Config\",\n  \"resourceName\" : \"Infrastructure Configuration\",\n  \"uiAlertsToEmail\" : \"alertsui@example.com\",\n  \"uiCsrfSalt\" : \"ZZZYYYXXX\",\n  \"uiDomainName\" : \"ui.example.com\",\n  \"uiEmailFrom\" : \"fromui@example.com\",\n  \"uiLoginCookieSignatureSalt\" : \"WWWVVVUUU\",\n  \"uiVersion\" : \"0.1.1\"\n}"
+  }, {
+    "resource" : "InfraConfigPlugin | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar -> 7cb36a42730514aa09bd9fea97185e65a4755bc65c392a9ba78c451acfd35faf8a639a16a66cf567a503c6ecff78a4df5229155ceb2b126d581ebb8315421f58",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar -> 7cb36a42730514aa09bd9fea97185e65a4755bc65c392a9ba78c451acfd35faf8a639a16a66cf567a503c6ecff78a4df5229155ceb2b126d581ebb8315421f58\",\n  \"resourceEditorName\" : \"Infrastructure Config - Plugin\",\n  \"resourceName\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar\",\n  \"sha512\" : \"7cb36a42730514aa09bd9fea97185e65a4755bc65c392a9ba78c451acfd35faf8a639a16a66cf567a503c6ecff78a4df5229155ceb2b126d581ebb8315421f58\",\n  \"url\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar\"\n}"
+  }, {
+    "resource" : "InfraConfigPlugin | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar | https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar -> 266cb8ff8dd034ec611cf253aeda162952618d5005d96ddab2ebeaef8293f10edc8373e3297581763f37295f2f3a29f82b09797ff6b715cc3a71e1d935d3b10c",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar -> 266cb8ff8dd034ec611cf253aeda162952618d5005d96ddab2ebeaef8293f10edc8373e3297581763f37295f2f3a29f82b09797ff6b715cc3a71e1d935d3b10c\",\n  \"resourceEditorName\" : \"Infrastructure Config - Plugin\",\n  \"resourceName\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\n  \"sha512\" : \"266cb8ff8dd034ec611cf253aeda162952618d5005d96ddab2ebeaef8293f10edc8373e3297581763f37295f2f3a29f82b09797ff6b715cc3a71e1d935d3b10c\",\n  \"url\" : \"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\"\n}"
+  }, {
+    "resource" : "Machine | m1.example.com | m1.example.com (127.0.0.1)",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "DnsEntry | m1.example.com / A | 127.0.0.1"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"name\" : \"m1.example.com\",\n  \"publicIp\" : \"127.0.0.1\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"m1.example.com (127.0.0.1)\",\n  \"resourceEditorName\" : \"Machine\",\n  \"resourceName\" : \"m1.example.com\"\n}"
+  }, {
+    "resource" : "MariaDBDatabase | logindb | ",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "MariaDBServer | commonserver | "
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"description\" : \"\",\n  \"name\" : \"logindb\",\n  \"resourceCategory\" : \"DATABASE\",\n  \"resourceDescription\" : \"\",\n  \"resourceEditorName\" : \"MariaDB Database\",\n  \"resourceName\" : \"logindb\"\n}"
+  }, {
+    "resource" : "MariaDBDatabase | uidb | ",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "MariaDBServer | commonserver | "
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"description\" : \"\",\n  \"name\" : \"uidb\",\n  \"resourceCategory\" : \"DATABASE\",\n  \"resourceDescription\" : \"\",\n  \"resourceEditorName\" : \"MariaDB Database\",\n  \"resourceName\" : \"uidb\"\n}"
+  }, {
+    "resource" : "MariaDBServer | commonserver | ",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "MANAGES",
+      "to" : "Application | commonserver | "
+    }, {
+      "type" : "RUN_AS",
+      "to" : "UnixUser | mariadb | /home/mariadb"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"description\" : \"\",\n  \"name\" : \"commonserver\",\n  \"resourceCategory\" : \"DATABASE\",\n  \"resourceDescription\" : \"\",\n  \"resourceEditorName\" : \"MariaDB Server\",\n  \"resourceName\" : \"commonserver\",\n  \"rootPassword\" : \"masterqwerty\"\n}"
+  }, {
+    "resource" : "MariaDBUser | loginuser | ",
+    "links" : [ {
+      "type" : "CAN_ADMIN",
+      "to" : "MariaDBDatabase | logindb | "
+    }, {
+      "type" : "CAN_READ",
+      "to" : "MariaDBDatabase | logindb | "
+    }, {
+      "type" : "CAN_WRITE",
+      "to" : "MariaDBDatabase | logindb | "
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"description\" : \"\",\n  \"name\" : \"loginuser\",\n  \"password\" : \"qwerty\",\n  \"resourceCategory\" : \"DATABASE\",\n  \"resourceDescription\" : \"\",\n  \"resourceEditorName\" : \"MariaDB User\",\n  \"resourceName\" : \"loginuser\"\n}"
+  }, {
+    "resource" : "MariaDBUser | uiuser | qwerty",
+    "links" : [ {
+      "type" : "CAN_ADMIN",
+      "to" : "MariaDBDatabase | uidb | "
+    }, {
+      "type" : "CAN_READ",
+      "to" : "MariaDBDatabase | uidb | "
+    }, {
+      "type" : "CAN_WRITE",
+      "to" : "MariaDBDatabase | uidb | "
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"description\" : \"qwerty\",\n  \"name\" : \"uiuser\",\n  \"password\" : \"qwerty\",\n  \"resourceCategory\" : \"DATABASE\",\n  \"resourceDescription\" : \"qwerty\",\n  \"resourceEditorName\" : \"MariaDB User\",\n  \"resourceName\" : \"uiuser\"\n}"
+  }, {
+    "resource" : "UnixUser | infra_web | /home/infra_web",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"hashedPassword\" : null,\n  \"homeFolder\" : \"/home/infra_web\",\n  \"id\" : 2003,\n  \"name\" : \"infra_web\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"/home/infra_web\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_web\",\n  \"shell\" : null\n}"
+  }, {
+    "resource" : "UnixUser | login | /home/login",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"hashedPassword\" : null,\n  \"homeFolder\" : \"/home/login\",\n  \"id\" : 2001,\n  \"name\" : \"login\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"/home/login\",\n  \"resourceEditorName\" : \"Unix User\",\n  \"resourceName\" : \"login\",\n  \"shell\" : \"/bin/bash\"\n}"
+  }, {
+    "resource" : "UnixUser | mariadb | /home/mariadb",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"hashedPassword\" : null,\n  \"homeFolder\" : \"/home/mariadb\",\n  \"id\" : 2000,\n  \"name\" : \"mariadb\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"/home/mariadb\",\n  \"resourceEditorName\" : \"Unix User\",\n  \"resourceName\" : \"mariadb\",\n  \"shell\" : \"/bin/bash\"\n}"
+  }, {
+    "resource" : "UnixUser | ui | /home/ui",
+    "links" : [ ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"hashedPassword\" : null,\n  \"homeFolder\" : \"/home/ui\",\n  \"id\" : 2002,\n  \"name\" : \"ui\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"/home/ui\",\n  \"resourceEditorName\" : \"Unix User\",\n  \"resourceName\" : \"ui\",\n  \"shell\" : \"/bin/bash\"\n}"
+  }, {
+    "resource" : "Website | infra_login | login.example.com",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "MANAGES",
+      "to" : "DnsPointer | login.example.com | login.example.com"
+    }, {
+      "type" : "MANAGES",
+      "to" : "WebsiteCertificate | login.example.com | 3db0fbf94792b7eb21db1652e0566f7d2b5904e9, 2018-06-13, 2018-07-13"
+    }, {
+      "type" : "POINTS_TO",
+      "to" : "Application | infra_login | Login service"
+    }, {
+      "type" : "USES",
+      "to" : "WebsiteCertificate | login.example.com | 3db0fbf94792b7eb21db1652e0566f7d2b5904e9, 2018-06-13, 2018-07-13"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationEndpoint\" : \"HTTP_TCP\",\n  \"domainNames\" : [ \"login.example.com\" ],\n  \"https\" : true,\n  \"name\" : \"infra_login\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"login.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_login\"\n}"
+  }, {
+    "resource" : "Website | infra_ui | ui.example.com",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "MANAGES",
+      "to" : "DnsPointer | ui.example.com | ui.example.com"
+    }, {
+      "type" : "MANAGES",
+      "to" : "WebsiteCertificate | ui.example.com | 1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629, 2018-06-13, 2018-07-13"
+    }, {
+      "type" : "POINTS_TO",
+      "to" : "Application | infra_ui | UI service"
+    }, {
+      "type" : "USES",
+      "to" : "WebsiteCertificate | ui.example.com | 1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629, 2018-06-13, 2018-07-13"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"applicationEndpoint\" : \"HTTP_TCP\",\n  \"domainNames\" : [ \"ui.example.com\" ],\n  \"https\" : true,\n  \"name\" : \"infra_ui\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"ui.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"infra_ui\"\n}"
+  }, {
+    "resource" : "WebsiteCertificate | login.example.com | 3db0fbf94792b7eb21db1652e0566f7d2b5904e9, 2018-06-13, 2018-07-13",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | login.example.com | Domain for login.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"caCertificate\" : null,\n  \"certificate\" : \"-----BEGIN CERTIFICATE-----\\nMIIE0zCCArugAwIBAgIBATANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFsb2dp\\nbi5leGFtcGxlLmNvbTAeFw0xODA2MTMyMDEyMjlaFw0xODA3MTMyMDEyMjlaMBwx\\nGjAYBgNVBAMMEWxvZ2luLmV4YW1wbGUuY29tMIICIjANBgkqhkiG9w0BAQEFAAOC\\nAg8AMIICCgKCAgEAmD6+w8GwggdZtnVa5LTT9cpgITPaOU+pLhNLCweWn+iJueyN\\nc1sVzzbA92gPBDx9+pr4aoJyhF/CMxu5hBygm0I5oNNbFEcGkVELEIfhb9uSNRem\\nr1m7+0ndrbCiP9LjkWhPnPo88hUAq8VyseW34Kdwk9rgB1tsE9beG5ukwJzy6VLo\\nLcxg5Ts3QWu6EQnJZfzRtdRC8FiOyluMNF12NI5iqiQZ3LOaHNIAHLoZFgdiYnT0\\nL3qiuE15FBRXsq+RDnj9j9uWB0QOt0BFWwoOtuQzO9Q90l1v3+iXXNYafoYPDjyx\\nCGeGJtq6ArZ5MYVbyL5FwkF/1MjH6YSOsgMLjEzMU8lDI+NbXyghlgkdq3BqQT/O\\n1Llm7DCddUcu/CjPF5bU8goEQqrxQSZ1vzA/okPjRfkV9lGHAemTURSONQLaYAtm\\noEi3Iq7kBC6DvyNeHZzh46ESZp/tBH0qEwqEYtKb0YwxDh+kF68s4sBJMl06S2dZ\\newN6y2VPguLNjFkRND2PLTQDlb6E2wR7UWC7p57z9iiqRkV5QoZuUJe9Dwh/Wx32\\nNyE5NO2EpmnLxXknFuLH1DjDfU+TcHTaTI12SOIpFszEiwsoYhHHKJx1PXQG8yt1\\nPo5/D8LABZ4QoP+7yvm21wEBZqd8uPsjJSvXTdGzmRMJLXmsOo78DhgAYHcCAwEA\\nAaMgMB4wHAYDVR0RBBUwE4IRbG9naW4uZXhhbXBsZS5jb20wDQYJKoZIhvcNAQEL\\nBQADggIBADVIPICNmP8XlQkgYRnW2+HMFgSdEmrznic/FZxp5djPtzIIvYNkygrV\\n7KgBujGaM/Lz062o+la1tts8MTNwo1MnxXS200CITvF5KPuWgySQWCbB0W3MVUu6\\nBe4HJ+GGVE4EAPBu7zl9boM77yaB89UPEpqTPFMVcb+2/l5SqZOohl3jR297KCo7\\nzqElIqZ0HQaJ2fg3e3ppCBKTDYpNTkoKy/CLgBZJTHWb8N9u28w6/gSlHKxQafgQ\\nr0sygZPJX9uDraJ6Yq1sWzZ1df2GtBwAeiM81MwW3lXa7s91gqfCu4doZYGJxKYA\\nzGittzgs6mxP0KC+YFLsu9mlR8t+USMnhcXD3F/zS9jY+Fun/A0x5pqbu/gwWcS6\\nELvA4pcZBsaniV+Kdc/vRPM0+YLMZ+RX7xnNqzaMUO4pKdPZZ2Y9a3qiAlEJtPcX\\n4/TH2J/UxfpDHTIKwNDnBqfE8d5i8mcEHephqI2zU++JHyMx/EMIMf7oQJ5YMmnx\\nbtahMD33W123sboJJIcvIDjnMxH0z8IGIltyLARl4BjDKrIy3tj2NleDxUCXl3/4\\n5M65wcaFxjAIbSonGw4Rgtl50U/5MOe7pbrd1bJZrZhMzu0CaZsULlKI0nppog4g\\n4bqT/INCICc3UmtNeyIhE3csWC/UrsOSCqKV8KAVMalJRBKRafqq\\n-----END CERTIFICATE-----\\n\",\n  \"domainNames\" : [ \"login.example.com\" ],\n  \"end\" : 1531512749000,\n  \"privateKey\" : \"-----BEGIN RSA PRIVATE KEY-----\\n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\\n-----END RSA PRIVATE KEY-----\\n\",\n  \"publicKey\" : \"-----BEGIN PUBLIC KEY-----\\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmD6+w8GwggdZtnVa5LTT\\n9cpgITPaOU+pLhNLCweWn+iJueyNc1sVzzbA92gPBDx9+pr4aoJyhF/CMxu5hByg\\nm0I5oNNbFEcGkVELEIfhb9uSNRemr1m7+0ndrbCiP9LjkWhPnPo88hUAq8VyseW3\\n4Kdwk9rgB1tsE9beG5ukwJzy6VLoLcxg5Ts3QWu6EQnJZfzRtdRC8FiOyluMNF12\\nNI5iqiQZ3LOaHNIAHLoZFgdiYnT0L3qiuE15FBRXsq+RDnj9j9uWB0QOt0BFWwoO\\ntuQzO9Q90l1v3+iXXNYafoYPDjyxCGeGJtq6ArZ5MYVbyL5FwkF/1MjH6YSOsgML\\njEzMU8lDI+NbXyghlgkdq3BqQT/O1Llm7DCddUcu/CjPF5bU8goEQqrxQSZ1vzA/\\nokPjRfkV9lGHAemTURSONQLaYAtmoEi3Iq7kBC6DvyNeHZzh46ESZp/tBH0qEwqE\\nYtKb0YwxDh+kF68s4sBJMl06S2dZewN6y2VPguLNjFkRND2PLTQDlb6E2wR7UWC7\\np57z9iiqRkV5QoZuUJe9Dwh/Wx32NyE5NO2EpmnLxXknFuLH1DjDfU+TcHTaTI12\\nSOIpFszEiwsoYhHHKJx1PXQG8yt1Po5/D8LABZ4QoP+7yvm21wEBZqd8uPsjJSvX\\nTdGzmRMJLXmsOo78DhgAYHcCAwEAAQ==\\n-----END PUBLIC KEY-----\\n\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceEditorName\" : \"Self-signed WebsiteCertificate\",\n  \"start\" : 1528920749000,\n  \"thumbprint\" : \"3db0fbf94792b7eb21db1652e0566f7d2b5904e9\"\n}"
+  }, {
+    "resource" : "WebsiteCertificate | ui.example.com | 1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629, 2018-06-13, 2018-07-13",
+    "links" : [ {
+      "type" : "MANAGES",
+      "to" : "Domain | ui.example.com | Domain for ui.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"caCertificate\" : null,\n  \"certificate\" : \"-----BEGIN CERTIFICATE-----\\nMIIEyjCCArKgAwIBAgIBATANBgkqhkiG9w0BAQsFADAZMRcwFQYDVQQDDA51aS5l\\neGFtcGxlLmNvbTAeFw0xODA2MTMyMDEyNTVaFw0xODA3MTMyMDEyNTVaMBkxFzAV\\nBgNVBAMMDnVpLmV4YW1wbGUuY29tMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIIC\\nCgKCAgEArUAJhkOYtQQXx1bCZ05EbzdXjOSHwxc8yeaOiBBzGJqYLPbAOnSwXR6q\\ndgeJzFjkGkN2ue5lRM8RM7bAvWOvJVrRT1MnKg2hD311WdyIwfr/uWk54MwBh7nK\\n/kdYcNliZ0gc3Lyj6zh6onZtQ60bYpqCuj/KYJWDUEEakN91k4/EyxV6U+Js6+sV\\n6uux8wDP4mFxAtLtNj4zLzXAo+gzf++7KbHvm2nJfoAl9jrSRVLdtNew8njVO595\\nZSjHeyK9lUkjcBh7Sq0bpaID5iMe3MeidewBQFNAeeJRUCF/AYMds90pY/6c8eb5\\nskxDwE8wjMuMvdBRhsQVuOcm17LUMuSkT43OlZJLXSzcD3tq0Nl8BimsCR3Wv/f9\\n5lV+EzwSfn3GmRikT/dDBk88P2ixj+WEwE2B50OW0jVtTZ12wZdFKLR3U9mWRPEr\\nxVZujOrGhGvL4XCWxDCHXZ3OYaFldVZZrd7ZkLlAc0gT3qH0K9H0JKnrN5v6IRVH\\n8P7/Gpt6Loz72gaiFck8WCIWm7QMYmlUfnzMZqNPXSkXG8E9RBs2I44wS5lS1EJn\\nSCxK8tfgnNcVNjkUW6W9oJM6808IycCfn15pPuC4exSWNpRb+YssBldbafaukX9M\\nA+E4pQk8mU/pYzPTrkKKUTY7wYJLQfciJQ1sk2YChKWTDj3PsWUCAwEAAaMdMBsw\\nGQYDVR0RBBIwEIIOdWkuZXhhbXBsZS5jb20wDQYJKoZIhvcNAQELBQADggIBAJ0T\\nxSoS9BQWM+sRg7Yb8AnxnzEqX5utNZ+ba4IhzzN3E/rBxaFnCKiDXmSWXkyZsbTS\\nRemUgpk5pqLxYC2QJ1MdRPdeQqgy2n07ilA2d18BATqsUACgYMvs5tfpge3VlJ79\\nq9XOTyK7EKUkck47C+Okwiw4msS47nKwA+AsPS5E4Xg/tTSVNOrgdlKAqeBhIyXH\\nzqi6jESBXD5sPuOMGpcFH+HNE/KNsuRHtoWhBVVOoWixWNy/HkNtMdBl/ibeSBqI\\ninxu9dJquFZADkfNkpW61T0DLML6F0dQJs1A78gj1TxqdvtZcx21Q2MminPdr6+c\\n/zUZ9pGAaXvKxnLuFeWSGoasMqGD6SVQAzlq0du653cVNxy07jrB0lod8HV3judk\\n6kshhf4OwAyDJQPx42ywPwZmxAiPaN2kWVvj9eloKcnjAKlX5QYUg6yLqYQHP75h\\nUS0c5LF+491vXk0pQ/vcNYZSy7wLQjGPOVIdEjs3IQ2majFpyLYEhAHskFNBsCUF\\nH2IploDhmp72dyQMt/3Oqu23oLOFV4f1r3qd0zkzQ06OwcdJEKXuXQTypkqH30wa\\nVlhC4/4a2C/9Svd50JhQuUaaExqCzo3mthBnd22bmrHvDbcTCygYNxozTdMbvWlr\\nuv3kL4JTDKv2nqgWokl+v6iM2Y1EuNxnKt7hvG7C\\n-----END CERTIFICATE-----\\n\",\n  \"domainNames\" : [ \"ui.example.com\" ],\n  \"end\" : 1531512775000,\n  \"privateKey\" : \"-----BEGIN RSA PRIVATE KEY-----\\n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\\n-----END RSA PRIVATE KEY-----\\n\",\n  \"publicKey\" : \"-----BEGIN PUBLIC KEY-----\\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEArUAJhkOYtQQXx1bCZ05E\\nbzdXjOSHwxc8yeaOiBBzGJqYLPbAOnSwXR6qdgeJzFjkGkN2ue5lRM8RM7bAvWOv\\nJVrRT1MnKg2hD311WdyIwfr/uWk54MwBh7nK/kdYcNliZ0gc3Lyj6zh6onZtQ60b\\nYpqCuj/KYJWDUEEakN91k4/EyxV6U+Js6+sV6uux8wDP4mFxAtLtNj4zLzXAo+gz\\nf++7KbHvm2nJfoAl9jrSRVLdtNew8njVO595ZSjHeyK9lUkjcBh7Sq0bpaID5iMe\\n3MeidewBQFNAeeJRUCF/AYMds90pY/6c8eb5skxDwE8wjMuMvdBRhsQVuOcm17LU\\nMuSkT43OlZJLXSzcD3tq0Nl8BimsCR3Wv/f95lV+EzwSfn3GmRikT/dDBk88P2ix\\nj+WEwE2B50OW0jVtTZ12wZdFKLR3U9mWRPErxVZujOrGhGvL4XCWxDCHXZ3OYaFl\\ndVZZrd7ZkLlAc0gT3qH0K9H0JKnrN5v6IRVH8P7/Gpt6Loz72gaiFck8WCIWm7QM\\nYmlUfnzMZqNPXSkXG8E9RBs2I44wS5lS1EJnSCxK8tfgnNcVNjkUW6W9oJM6808I\\nycCfn15pPuC4exSWNpRb+YssBldbafaukX9MA+E4pQk8mU/pYzPTrkKKUTY7wYJL\\nQfciJQ1sk2YChKWTDj3PsWUCAwEAAQ==\\n-----END PUBLIC KEY-----\\n\",\n  \"resourceCategory\" : \"NET\",\n  \"resourceEditorName\" : \"Self-signed WebsiteCertificate\",\n  \"start\" : 1528920775000,\n  \"thumbprint\" : \"1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629\"\n}"
+  } ]
+}

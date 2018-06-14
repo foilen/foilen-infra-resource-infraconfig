@@ -28,6 +28,7 @@ import com.foilen.infra.plugin.v1.model.resource.InfraPluginResourceCategory;
  * <li>MariaDBDatabase: (1) UI_USES - The database to use.</li>
  * <li>MariaDBUser: (1) UI_USES - The database user to use.</li>
  * <li>UnixUser: (1) UI_USES - The unix user to RUN_AS.</li>
+ * <li>{@link InfraConfigPlugin}: (optional / many) USES - The plugins to install</li>
  * </ul>
  *
  * Manages:
@@ -53,12 +54,14 @@ public class InfraConfig extends AbstractIPResource {
     public static final String PROPERTY_LOGIN_ADMINISTRATOR_EMAIL = "loginAdministratorEmail";
     public static final String PROPERTY_LOGIN_CSRF_SALT = "loginCsrfSalt";
     public static final String PROPERTY_LOGIN_COOKIE_SIGNATURE_SALT = "loginCookieSignatureSalt";
+    public static final String PROPERTY_LOGIN_VERSION = "loginVersion";
 
     public static final String PROPERTY_UI_DOMAIN_NAME = "uiDomainName";
     public static final String PROPERTY_UI_EMAIL_FROM = "uiEmailFrom";
     public static final String PROPERTY_UI_ALERTS_TO_EMAIL = "uiAlertsToEmail";
     public static final String PROPERTY_UI_CSRF_SALT = "uiCsrfSalt";
     public static final String PROPERTY_UI_LOGIN_COOKIE_SIGNATURE_SALT = "uiLoginCookieSignatureSalt";
+    public static final String PROPERTY_UI_VERSION = "uiVersion";
 
     // Common
     private String applicationId;
@@ -69,6 +72,7 @@ public class InfraConfig extends AbstractIPResource {
     private String loginAdministratorEmail;
     private String loginCsrfSalt;
     private String loginCookieSignatureSalt;
+    private String loginVersion;
 
     // UI
     private String uiDomainName;
@@ -76,6 +80,7 @@ public class InfraConfig extends AbstractIPResource {
     private String uiAlertsToEmail;
     private String uiCsrfSalt;
     private String uiLoginCookieSignatureSalt;
+    private String uiVersion;
 
     public InfraConfig() {
     }
@@ -102,6 +107,10 @@ public class InfraConfig extends AbstractIPResource {
 
     public String getLoginEmailFrom() {
         return loginEmailFrom;
+    }
+
+    public String getLoginVersion() {
+        return loginVersion;
     }
 
     @Override
@@ -139,6 +148,10 @@ public class InfraConfig extends AbstractIPResource {
         return uiLoginCookieSignatureSalt;
     }
 
+    public String getUiVersion() {
+        return uiVersion;
+    }
+
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
     }
@@ -163,6 +176,10 @@ public class InfraConfig extends AbstractIPResource {
         this.loginEmailFrom = loginEmailFrom;
     }
 
+    public void setLoginVersion(String loginVersion) {
+        this.loginVersion = loginVersion;
+    }
+
     public void setUiAlertsToEmail(String uiAlertsToEmail) {
         this.uiAlertsToEmail = uiAlertsToEmail;
     }
@@ -181,6 +198,10 @@ public class InfraConfig extends AbstractIPResource {
 
     public void setUiLoginCookieSignatureSalt(String uiLoginCookieSignatureSalt) {
         this.uiLoginCookieSignatureSalt = uiLoginCookieSignatureSalt;
+    }
+
+    public void setUiVersion(String uiVersion) {
+        this.uiVersion = uiVersion;
     }
 
 }

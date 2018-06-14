@@ -1,0 +1,2 @@
+include 'foilen-infra-resource-infraconfig'
+include 'foilen-infra-resource-infraconfig_testing'

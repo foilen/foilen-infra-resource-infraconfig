@@ -100,6 +100,7 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
         List<MariaDBUser> uiMariaDBUsers = resourceService.linkFindAllByFromResourceAndLinkTypeAndToResourceClass(infraConfig, InfraConfig.LINK_TYPE_UI_USES, MariaDBUser.class);
         List<UnixUser> uiUnixUsers = resourceService.linkFindAllByFromResourceAndLinkTypeAndToResourceClass(infraConfig, InfraConfig.LINK_TYPE_UI_USES, UnixUser.class);
         List<Machine> uiMachines = resourceService.linkFindAllByFromResourceAndLinkTypeAndToResourceClass(infraConfig, InfraConfig.LINK_TYPE_UI_INSTALLED_ON, Machine.class);
+        List<InfraConfigPlugin> uiPlugins = resourceService.linkFindAllByFromResourceAndLinkTypeAndToResourceClass(infraConfig, InfraConfig.LINK_TYPE_UI_USES, InfraConfigPlugin.class);
 
         validateResourcesToUse(resourceService, loginWebsiteCertificates, loginMariaDBServers, loginMariaDBDatabases, loginMariaDBUsers, loginUnixUsers, loginMachines);
         validateResourcesToUse(resourceService, uiWebsiteCertificates, uiMariaDBServers, uiMariaDBDatabases, uiMariaDBUsers, uiUnixUsers, uiMachines);
@@ -152,7 +153,7 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
 
                 IPApplicationDefinition loginApplicationDefinition = loginApplication.getApplicationDefinition();
 
-                loginApplicationDefinition.setFrom("foilen-login:0.2.1");
+                loginApplicationDefinition.setFrom("foilen/foilen-login:" + infraConfig.getLoginVersion());
 
                 loginApplicationDefinition.getEnvironments().put("CONFIG_FILE", "/login_config.json");
 
@@ -228,12 +229,35 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
 
                 IPApplicationDefinition uiApplicationDefinition = uiApplication.getApplicationDefinition();
 
-                uiApplicationDefinition.setFrom("foilen-infra-ui:0.1.0");
+                uiApplicationDefinition.setFrom("foilen/foilen-infra-ui:" + infraConfig.getUiVersion());
 
                 uiApplicationDefinition.getEnvironments().put("CONFIG_FILE", "/ui_config.json");
 
                 IPApplicationDefinitionAssetsBundle uiAssetsBundle = uiApplicationDefinition.addAssetsBundle();
                 uiAssetsBundle.addAssetContent("/ui_config.json", JsonTools.prettyPrint(infraUiConfig));
+
+                // Plugins
+                uiApplicationDefinition.getEnvironments().put("PLUGINS_JARS", "/plugins/");
+                uiApplicationDefinition.addBuildStepCommand("mkdir /plugins/");
+                StringBuilder downloadPluginsCommandSb = new StringBuilder();
+                boolean first = true;
+                for (InfraConfigPlugin configPlugin : uiPlugins) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        downloadPluginsCommandSb.append(" && ");
+                    }
+                    String finalFileName = configPlugin.getUrl().substring(configPlugin.getUrl().lastIndexOf('/') + 1);
+                    downloadPluginsCommandSb.append("curl -L ").append(configPlugin.getUrl()).append(" -o tmp && ");
+                    downloadPluginsCommandSb.append("echo ").append(configPlugin.getSha512()).append(" tmp > tmp.sha512 && ");
+                    downloadPluginsCommandSb.append("sha512sum -c tmp.sha512 && ");
+                    downloadPluginsCommandSb.append("rm tmp.sha512 && ");
+                    downloadPluginsCommandSb.append("mv tmp ").append(finalFileName);
+                }
+                String downloadPluginsCommand = downloadPluginsCommandSb.toString();
+                if (!downloadPluginsCommand.isEmpty()) {
+                    uiApplicationDefinition.addBuildStepCommand(downloadPluginsCommand);
+                }
 
                 uiApplicationDefinition.addPortRedirect(3306, uiMariaDBServerMachine, uiMariaDBServer.getName(), DockerContainerEndpoints.MYSQL_TCP);
                 uiApplicationDefinition.addPortEndpoint(8080, DockerContainerEndpoints.HTTP_TCP);
