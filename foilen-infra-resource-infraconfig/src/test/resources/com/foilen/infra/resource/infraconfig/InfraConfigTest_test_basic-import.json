@@ -13,7 +13,7 @@
 		{
 			"resourceType": "Infrastructure Plugin",
 			"resourceName": "https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar",
-			"resourceJson": "{\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar -> 266cb8ff8dd034ec611cf253aeda162952618d5005d96ddab2ebeaef8293f10edc8373e3297581763f37295f2f3a29f82b09797ff6b715cc3a71e1d935d3b10c\",\"resourceEditorName\":\"Infrastructure Config - Plugin\",\"resourceName\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"sha512\":\"266cb8ff8dd034ec611cf253aeda162952618d5005d96ddab2ebeaef8293f10edc8373e3297581763f37295f2f3a29f82b09797ff6b715cc3a71e1d935d3b10c\",\"url\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\"}"
+			"resourceJson": "{\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"resourceEditorName\":\"Infrastructure Config - Plugin\",\"resourceName\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"url\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\"}"
 		},
 		{
 			"resourceType": "Machine",
@@ -112,6 +112,11 @@
 			"fromResourceTypeAndName": "Infrastructure Configuration/Infrastructure Configuration",
 			"linkType": "UI_USES",
 			"toResourceTypeAndName": "Infrastructure Plugin/https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-dns/0.1.0/foilen-infra-resource-dns-0.1.0.jar"
+		},
+		{
+			"fromResourceTypeAndName": "Infrastructure Configuration/Infrastructure Configuration",
+			"linkType": "UI_USES",
+			"toResourceTypeAndName": "Infrastructure Plugin/https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar"
 		},
 		{
 			"fromResourceTypeAndName": "Infrastructure Configuration/Infrastructure Configuration",

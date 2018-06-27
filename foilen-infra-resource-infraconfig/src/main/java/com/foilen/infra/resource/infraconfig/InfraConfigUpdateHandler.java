@@ -241,17 +241,22 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
                 uiApplicationDefinition.addBuildStepCommand("mkdir /plugins/");
                 StringBuilder downloadPluginsCommandSb = new StringBuilder();
                 boolean first = true;
+                logger.debug("Found {} plugins to install", uiPlugins.size());
                 for (InfraConfigPlugin configPlugin : uiPlugins) {
                     if (first) {
                         first = false;
                     } else {
                         downloadPluginsCommandSb.append(" && ");
                     }
+                    logger.debug("Installing plugin {}", configPlugin.getUrl());
                     String finalFileName = configPlugin.getUrl().substring(configPlugin.getUrl().lastIndexOf('/') + 1);
                     downloadPluginsCommandSb.append("curl -L ").append(configPlugin.getUrl()).append(" -o tmp && ");
-                    downloadPluginsCommandSb.append("echo ").append(configPlugin.getSha512()).append(" tmp > tmp.sha512 && ");
-                    downloadPluginsCommandSb.append("sha512sum -c tmp.sha512 && ");
-                    downloadPluginsCommandSb.append("rm tmp.sha512 && ");
+                    if (!Strings.isNullOrEmpty(configPlugin.getSha512())) {
+                        logger.debug("Plugin {} has an SHA512 check of {}", configPlugin.getUrl(), configPlugin.getSha512());
+                        downloadPluginsCommandSb.append("echo ").append(configPlugin.getSha512()).append(" tmp > tmp.sha512 && ");
+                        downloadPluginsCommandSb.append("sha512sum -c tmp.sha512 && ");
+                        downloadPluginsCommandSb.append("rm tmp.sha512 && ");
+                    }
                     downloadPluginsCommandSb.append("mv tmp ").append(finalFileName);
                 }
                 String downloadPluginsCommand = downloadPluginsCommandSb.toString();

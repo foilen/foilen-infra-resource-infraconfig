@@ -11,6 +11,7 @@ package com.foilen.infra.resource.infraconfig;
 
 import com.foilen.infra.plugin.v1.model.resource.AbstractIPResource;
 import com.foilen.infra.plugin.v1.model.resource.InfraPluginResourceCategory;
+import com.google.common.base.Strings;
 
 /**
  * This is the details of the folder structure.
@@ -39,7 +40,11 @@ public class InfraConfigPlugin extends AbstractIPResource {
 
     @Override
     public String getResourceDescription() {
-        return url + " -> " + sha512;
+        if (Strings.isNullOrEmpty(sha512)) {
+            return url;
+        } else {
+            return url + " -> " + sha512;
+        }
     }
 
     @Override
