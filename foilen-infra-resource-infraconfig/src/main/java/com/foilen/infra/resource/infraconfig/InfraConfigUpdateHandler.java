@@ -245,6 +245,7 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
                 for (InfraConfigPlugin configPlugin : uiPlugins) {
                     if (first) {
                         first = false;
+                        downloadPluginsCommandSb.append("cd /plugins/ && ");
                     } else {
                         downloadPluginsCommandSb.append(" && ");
                     }
