@@ -28,7 +28,7 @@ import com.foilen.infra.plugin.v1.model.resource.InfraPluginResourceCategory;
  * <li>MariaDBDatabase: (1) UI_USES - The database to use.</li>
  * <li>MariaDBUser: (1) UI_USES - The database user to use.</li>
  * <li>UnixUser: (1) UI_USES - The unix user to RUN_AS.</li>
- * <li>{@link InfraConfigPlugin}: (optional / many) USES - The plugins to install</li>
+ * <li>{@link InfraConfigPlugin}: (optional / many) UI_USES - The plugins to install</li>
  * </ul>
  *
  * Manages:
