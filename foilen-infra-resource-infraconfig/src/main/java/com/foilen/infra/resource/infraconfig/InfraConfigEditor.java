@@ -50,6 +50,20 @@ public class InfraConfigEditor extends SimpleResourceEditor<InfraConfig> {
             fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
             fieldConfig.addValidator(CommonValidation::validateEmail);
         });
+        simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_LOGIN_MAIL_HOST, fieldConfig -> {
+            fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
+            fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
+        });
+        simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_LOGIN_MAIL_PORT, fieldConfig -> {
+            fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
+            fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
+        });
+        simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_LOGIN_MAIL_USERNAME, fieldConfig -> {
+            fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
+        });
+        simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_LOGIN_MAIL_PASSWORD, fieldConfig -> {
+            fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
+        });
         simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_LOGIN_CSRF_SALT, fieldConfig -> {
             fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
             fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);

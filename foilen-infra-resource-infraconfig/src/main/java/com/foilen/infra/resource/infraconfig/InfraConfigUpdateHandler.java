@@ -136,6 +136,10 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
                 infraLoginConfig.setCsrfSalt(infraConfig.getLoginCsrfSalt());
 
                 infraLoginConfig.setFromEmail(infraConfig.getLoginEmailFrom());
+                infraLoginConfig.setMailHost(infraConfig.getLoginMailHost());
+                infraLoginConfig.setMailPort(infraConfig.getLoginMailPort());
+                infraLoginConfig.setMailUsername(infraConfig.getLoginMailUsername());
+                infraLoginConfig.setMailPassword(infraConfig.getLoginMailPassword());
 
                 boolean loginIsHttps = !loginWebsiteCertificates.isEmpty();
                 infraLoginConfig.setLoginBaseUrl((loginIsHttps ? "https://" : "http://") + infraConfig.getLoginDomainName());

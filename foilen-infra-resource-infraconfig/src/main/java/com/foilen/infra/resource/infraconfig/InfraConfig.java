@@ -52,6 +52,10 @@ public class InfraConfig extends AbstractIPResource {
     public static final String PROPERTY_LOGIN_DOMAIN_NAME = "loginDomainName";
     public static final String PROPERTY_LOGIN_EMAIL_FROM = "loginEmailFrom";
     public static final String PROPERTY_LOGIN_ADMINISTRATOR_EMAIL = "loginAdministratorEmail";
+    public static final String PROPERTY_LOGIN_MAIL_HOST = "loginMailHost";
+    public static final String PROPERTY_LOGIN_MAIL_PORT = "loginMailPort";
+    public static final String PROPERTY_LOGIN_MAIL_USERNAME = "loginMailUsername";
+    public static final String PROPERTY_LOGIN_MAIL_PASSWORD = "loginMailPassword";
     public static final String PROPERTY_LOGIN_CSRF_SALT = "loginCsrfSalt";
     public static final String PROPERTY_LOGIN_COOKIE_SIGNATURE_SALT = "loginCookieSignatureSalt";
     public static final String PROPERTY_LOGIN_VERSION = "loginVersion";
@@ -70,6 +74,10 @@ public class InfraConfig extends AbstractIPResource {
     private String loginDomainName;
     private String loginEmailFrom;
     private String loginAdministratorEmail;
+    private String loginMailHost = "127.0.0.1";
+    private int loginMailPort = 25;
+    private String loginMailUsername;
+    private String loginMailPassword;
     private String loginCsrfSalt;
     private String loginCookieSignatureSalt;
     private String loginVersion;
@@ -107,6 +115,22 @@ public class InfraConfig extends AbstractIPResource {
 
     public String getLoginEmailFrom() {
         return loginEmailFrom;
+    }
+
+    public String getLoginMailHost() {
+        return loginMailHost;
+    }
+
+    public String getLoginMailPassword() {
+        return loginMailPassword;
+    }
+
+    public int getLoginMailPort() {
+        return loginMailPort;
+    }
+
+    public String getLoginMailUsername() {
+        return loginMailUsername;
     }
 
     public String getLoginVersion() {
@@ -174,6 +198,22 @@ public class InfraConfig extends AbstractIPResource {
 
     public void setLoginEmailFrom(String loginEmailFrom) {
         this.loginEmailFrom = loginEmailFrom;
+    }
+
+    public void setLoginMailHost(String loginMailHost) {
+        this.loginMailHost = loginMailHost;
+    }
+
+    public void setLoginMailPassword(String loginMailPassword) {
+        this.loginMailPassword = loginMailPassword;
+    }
+
+    public void setLoginMailPort(int loginMailPort) {
+        this.loginMailPort = loginMailPort;
+    }
+
+    public void setLoginMailUsername(String loginMailUsername) {
+        this.loginMailUsername = loginMailUsername;
     }
 
     public void setLoginVersion(String loginVersion) {

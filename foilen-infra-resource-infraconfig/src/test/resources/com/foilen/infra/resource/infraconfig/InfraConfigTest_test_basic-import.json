@@ -3,7 +3,7 @@
 		{
 			"resourceType": "Infrastructure Configuration",
 			"resourceName": "Infrastructure Configuration",
-			"resourceJson": "{\"applicationId\":\"infra\",\"loginAdministratorEmail\":\"adminlogin@example.com\",\"loginCookieSignatureSalt\":\"DDDEEEFFF\",\"loginCsrfSalt\":\"AAABBBCCC\",\"loginDomainName\":\"login.example.com\",\"loginEmailFrom\":\"fromlogin@example.com\",\"loginVersion\":\"0.2.1\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"Basic Infrastructure (login and UI)\",\"resourceEditorName\":\"Infrastructure Config\",\"resourceName\":\"Infrastructure Configuration\",\"uiAlertsToEmail\":\"alertsui@example.com\",\"uiCsrfSalt\":\"ZZZYYYXXX\",\"uiDomainName\":\"ui.example.com\",\"uiEmailFrom\":\"fromui@example.com\",\"uiLoginCookieSignatureSalt\":\"WWWVVVUUU\",\"uiVersion\":\"0.1.1\"}"
+			"resourceJson": "{\"applicationId\":\"infra\",\"loginAdministratorEmail\":\"adminlogin@example.com\",\"loginCookieSignatureSalt\":\"DDDEEEFFF\",\"loginCsrfSalt\":\"AAABBBCCC\",\"loginDomainName\":\"login.example.com\",\"loginEmailFrom\":\"fromlogin@example.com\",\"loginMailHost\":\"127.0.0.1\",\"loginMailPassword\":\"myPass\",\"loginMailPort\":25,\"loginMailUsername\":\"myUser\",\"loginVersion\":\"0.2.1\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"Basic Infrastructure (login and UI)\",\"resourceEditorName\":\"Infrastructure Config\",\"resourceName\":\"Infrastructure Configuration\",\"uiAlertsToEmail\":\"alertsui@example.com\",\"uiCsrfSalt\":\"ZZZYYYXXX\",\"uiDomainName\":\"ui.example.com\",\"uiEmailFrom\":\"fromui@example.com\",\"uiLoginCookieSignatureSalt\":\"WWWVVVUUU\",\"uiVersion\":\"0.1.1\"}"
 		},
 		{
 			"resourceType": "Infrastructure Plugin",
@@ -13,7 +13,7 @@
 		{
 			"resourceType": "Infrastructure Plugin",
 			"resourceName": "https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar",
-			"resourceJson": "{\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"resourceEditorName\":\"Infrastructure Config - Plugin\",\"resourceName\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"url\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\"}"
+			"resourceJson": "{\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"resourceEditorName\":\"Infrastructure Config - Plugin\",\"resourceName\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\",\"sha512\":null,\"url\":\"https://dl.bintray.com/foilen/maven/com/foilen/foilen-infra-resource-domain/0.1.0/foilen-infra-resource-domain-0.1.0.jar\"}"
 		},
 		{
 			"resourceType": "Machine",
