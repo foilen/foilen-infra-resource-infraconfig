@@ -29,7 +29,6 @@ public class InfraConfigPluginEditor extends SimpleResourceEditor<InfraConfigPlu
 
         simpleResourceEditorDefinition.addInputText(InfraConfigPlugin.PROPERTY_SHA512, fieldConfig -> {
             fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
-            fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
         });
 
     }
