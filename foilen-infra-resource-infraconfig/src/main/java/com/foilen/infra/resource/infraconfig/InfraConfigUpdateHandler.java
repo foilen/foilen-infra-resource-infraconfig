@@ -274,7 +274,7 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
 
                 uiApplicationDefinition.setRunAs(uiUnixUser.getId());
                 uiApplicationDefinition.setEntrypoint(new ArrayList<>());
-                uiApplicationDefinition.setCommand("/app/bin/foilen-infra-ui");
+                uiApplicationDefinition.setCommand("/app/bin/foilen-infra-ui --debug");
 
                 context.getManagedResources().add(uiApplication);
 
