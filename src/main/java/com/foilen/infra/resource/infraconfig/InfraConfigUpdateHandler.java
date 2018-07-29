@@ -215,8 +215,10 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
                 infraUiConfig.setMysqlDatabaseUserName(uiMariaDBUser.getName());
                 infraUiConfig.setMysqlDatabasePassword(uiMariaDBUser.getPassword());
 
-                infraUiConfig.setMailHost("127.0.0.1");
-                infraUiConfig.setMailPort(25);
+                infraUiConfig.setMailHost(infraConfig.getLoginMailHost());
+                infraUiConfig.setMailPort(infraConfig.getLoginMailPort());
+                infraUiConfig.setMailUsername(infraConfig.getLoginMailUsername());
+                infraUiConfig.setMailPassword(infraConfig.getLoginMailPassword());
 
                 infraUiConfig.setMailFrom(infraConfig.getUiEmailFrom());
                 infraUiConfig.setMailAlertsTo(infraConfig.getUiAlertsToEmail());

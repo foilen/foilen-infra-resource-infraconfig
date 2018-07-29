@@ -48,14 +48,14 @@ public class InfraConfig extends AbstractIPResource {
     public static final String LINK_TYPE_UI_USES = "UI_USES";
 
     public static final String PROPERTY_APPLICATION_ID = "applicationId";
+    public static final String PROPERTY_MAIL_HOST = "mailHost";
+    public static final String PROPERTY_MAIL_PORT = "mailPort";
+    public static final String PROPERTY_MAIL_USERNAME = "mailUsername";
+    public static final String PROPERTY_MAIL_PASSWORD = "mailPassword";
 
     public static final String PROPERTY_LOGIN_DOMAIN_NAME = "loginDomainName";
     public static final String PROPERTY_LOGIN_EMAIL_FROM = "loginEmailFrom";
     public static final String PROPERTY_LOGIN_ADMINISTRATOR_EMAIL = "loginAdministratorEmail";
-    public static final String PROPERTY_LOGIN_MAIL_HOST = "loginMailHost";
-    public static final String PROPERTY_LOGIN_MAIL_PORT = "loginMailPort";
-    public static final String PROPERTY_LOGIN_MAIL_USERNAME = "loginMailUsername";
-    public static final String PROPERTY_LOGIN_MAIL_PASSWORD = "loginMailPassword";
     public static final String PROPERTY_LOGIN_CSRF_SALT = "loginCsrfSalt";
     public static final String PROPERTY_LOGIN_COOKIE_SIGNATURE_SALT = "loginCookieSignatureSalt";
     public static final String PROPERTY_LOGIN_VERSION = "loginVersion";
@@ -69,15 +69,15 @@ public class InfraConfig extends AbstractIPResource {
 
     // Common
     private String applicationId;
+    private String mailHost = "127.0.0.1";
+    private int mailPort = 25;
+    private String mailUsername;
+    private String mailPassword;
 
     // Login
     private String loginDomainName;
     private String loginEmailFrom;
     private String loginAdministratorEmail;
-    private String loginMailHost = "127.0.0.1";
-    private int loginMailPort = 25;
-    private String loginMailUsername;
-    private String loginMailPassword;
     private String loginCsrfSalt;
     private String loginCookieSignatureSalt;
     private String loginVersion;
@@ -117,24 +117,44 @@ public class InfraConfig extends AbstractIPResource {
         return loginEmailFrom;
     }
 
+    @Deprecated
     public String getLoginMailHost() {
-        return loginMailHost;
+        return mailHost;
     }
 
+    @Deprecated
     public String getLoginMailPassword() {
-        return loginMailPassword;
+        return mailPassword;
     }
 
+    @Deprecated
     public int getLoginMailPort() {
-        return loginMailPort;
+        return mailPort;
     }
 
+    @Deprecated
     public String getLoginMailUsername() {
-        return loginMailUsername;
+        return mailUsername;
     }
 
     public String getLoginVersion() {
         return loginVersion;
+    }
+
+    public String getMailHost() {
+        return mailHost;
+    }
+
+    public String getMailPassword() {
+        return mailPassword;
+    }
+
+    public int getMailPort() {
+        return mailPort;
+    }
+
+    public String getMailUsername() {
+        return mailUsername;
     }
 
     @Override
@@ -200,24 +220,44 @@ public class InfraConfig extends AbstractIPResource {
         this.loginEmailFrom = loginEmailFrom;
     }
 
+    @Deprecated
     public void setLoginMailHost(String loginMailHost) {
-        this.loginMailHost = loginMailHost;
+        this.mailHost = loginMailHost;
     }
 
+    @Deprecated
     public void setLoginMailPassword(String loginMailPassword) {
-        this.loginMailPassword = loginMailPassword;
+        this.mailPassword = loginMailPassword;
     }
 
+    @Deprecated
     public void setLoginMailPort(int loginMailPort) {
-        this.loginMailPort = loginMailPort;
+        this.mailPort = loginMailPort;
     }
 
+    @Deprecated
     public void setLoginMailUsername(String loginMailUsername) {
-        this.loginMailUsername = loginMailUsername;
+        this.mailUsername = loginMailUsername;
     }
 
     public void setLoginVersion(String loginVersion) {
         this.loginVersion = loginVersion;
+    }
+
+    public void setMailHost(String mailHost) {
+        this.mailHost = mailHost;
+    }
+
+    public void setMailPassword(String mailPassword) {
+        this.mailPassword = mailPassword;
+    }
+
+    public void setMailPort(int mailPort) {
+        this.mailPort = mailPort;
+    }
+
+    public void setMailUsername(String mailUsername) {
+        this.mailUsername = mailUsername;
     }
 
     public void setUiAlertsToEmail(String uiAlertsToEmail) {
