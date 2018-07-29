@@ -12,10 +12,10 @@ package com.foilen.infra.resource.infraconfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.foilen.infra.plugin.v1.core.context.ChangesContext;
 import com.foilen.infra.plugin.v1.core.context.CommonServicesContext;
-import com.foilen.infra.plugin.v1.core.eventhandler.AbstractCommonMethodUpdateEventHandler;
-import com.foilen.infra.plugin.v1.core.eventhandler.CommonMethodUpdateEventHandlerContext;
+import com.foilen.infra.plugin.v1.core.eventhandler.AbstractFinalStateManagedResourcesEventHandler;
+import com.foilen.infra.plugin.v1.core.eventhandler.FinalStateManagedResource;
+import com.foilen.infra.plugin.v1.core.eventhandler.FinalStateManagedResourcesUpdateEventHandlerContext;
 import com.foilen.infra.plugin.v1.core.exception.IllegalUpdateException;
 import com.foilen.infra.plugin.v1.core.service.IPResourceService;
 import com.foilen.infra.plugin.v1.model.base.IPApplicationDefinition;
@@ -38,15 +38,12 @@ import com.foilen.smalltools.tools.JsonTools;
 import com.foilen.smalltools.tools.SecureRandomTools;
 import com.google.common.base.Strings;
 
-public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHandler<InfraConfig> {
+public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResourcesEventHandler<InfraConfig> {
 
     @Override
-    protected void commonHandlerExecute(CommonServicesContext services, ChangesContext changes, CommonMethodUpdateEventHandlerContext<InfraConfig> context) {
+    protected void commonHandlerExecute(CommonServicesContext services, FinalStateManagedResourcesUpdateEventHandlerContext<InfraConfig> context) {
 
-        context.setManagedResourcesUpdateContentIfExists(true);
-
-        context.getManagedResourceTypes().add(Application.class);
-        context.getManagedResourceTypes().add(Website.class);
+        context.addManagedResourceTypes(Application.class, Website.class);
 
         InfraConfig infraConfig = context.getResource();
 
@@ -63,26 +60,25 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
         }
 
         // Create missing values
-        boolean infraConfigNeedsUpdate = false;
         if (Strings.isNullOrEmpty(infraConfig.getApplicationId())) {
             infraConfig.setApplicationId(SecureRandomTools.randomHexString(25));
-            infraConfigNeedsUpdate = true;
+            context.setRequestUpdateResource(true);
         }
         if (Strings.isNullOrEmpty(infraConfig.getLoginCookieSignatureSalt())) {
             infraConfig.setLoginCookieSignatureSalt(SecureRandomTools.randomHexString(25));
-            infraConfigNeedsUpdate = true;
+            context.setRequestUpdateResource(true);
         }
         if (Strings.isNullOrEmpty(infraConfig.getLoginCsrfSalt())) {
             infraConfig.setLoginCsrfSalt(SecureRandomTools.randomHexString(25));
-            infraConfigNeedsUpdate = true;
+            context.setRequestUpdateResource(true);
         }
         if (Strings.isNullOrEmpty(infraConfig.getUiCsrfSalt())) {
             infraConfig.setUiCsrfSalt(SecureRandomTools.randomHexString(25));
-            infraConfigNeedsUpdate = true;
+            context.setRequestUpdateResource(true);
         }
         if (Strings.isNullOrEmpty(infraConfig.getUiLoginCookieSignatureSalt())) {
             infraConfig.setUiLoginCookieSignatureSalt(SecureRandomTools.randomHexString(25));
-            infraConfigNeedsUpdate = true;
+            context.setRequestUpdateResource(true);
         }
 
         // Get the user and machines
@@ -152,6 +148,10 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
 
                 // Login Application
                 Application loginApplication = new Application();
+                FinalStateManagedResource loginApplicationFinalState = new FinalStateManagedResource();
+                loginApplicationFinalState.setManagedResource(loginApplication);
+                context.addManagedResources(loginApplicationFinalState);
+
                 loginApplication.setName("infra_login");
                 loginApplication.setDescription("Login service");
 
@@ -171,25 +171,29 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
                 loginApplicationDefinition.setWorkingDirectory("/app");
                 loginApplicationDefinition.setCommand("java -jar foilen-login.jar");
 
-                context.getManagedResources().add(loginApplication);
-
+                loginApplicationFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON, LinkTypeConstants.RUN_AS);
                 for (Machine machine : loginMachines) {
-                    changes.linkAdd(loginApplication, LinkTypeConstants.INSTALLED_ON, machine);
+                    loginApplicationFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, machine);
                 }
-                changes.linkAdd(loginApplication, LinkTypeConstants.RUN_AS, loginUnixUser);
+                loginApplicationFinalState.addLinkTo(LinkTypeConstants.RUN_AS, loginUnixUser);
 
                 // Login Website
                 Website loginWebsite = new Website("infra_login");
+                FinalStateManagedResource loginWebsiteFinalState = new FinalStateManagedResource();
+                loginWebsiteFinalState.setManagedResource(loginWebsite);
+                context.addManagedResources(loginWebsiteFinalState);
+
                 loginWebsite.setApplicationEndpoint(DockerContainerEndpoints.HTTP_TCP);
                 loginWebsite.getDomainNames().add(infraConfig.getLoginDomainName());
                 loginWebsite.setHttps(loginIsHttps);
-                context.getManagedResources().add(loginWebsite);
-                changes.linkAdd(loginWebsite, LinkTypeConstants.POINTS_TO, loginApplication);
+
+                loginWebsiteFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON, LinkTypeConstants.POINTS_TO, LinkTypeConstants.USES);
+                loginWebsiteFinalState.addLinkTo(LinkTypeConstants.POINTS_TO, loginApplication);
                 if (loginIsHttps) {
-                    changes.linkAdd(loginWebsite, LinkTypeConstants.USES, loginWebsiteCertificates.get(0));
+                    loginWebsiteFinalState.addLinkTo(LinkTypeConstants.USES, loginWebsiteCertificates.get(0));
                 }
                 for (Machine loginMachine : loginMachines) {
-                    changes.linkAdd(loginWebsite, LinkTypeConstants.INSTALLED_ON, loginMachine);
+                    loginWebsiteFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, loginMachine);
                 }
 
                 // Prepare the UI config
@@ -228,6 +232,10 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
 
                 // UI Application
                 Application uiApplication = new Application();
+                FinalStateManagedResource uiApplicationFinalState = new FinalStateManagedResource();
+                uiApplicationFinalState.setManagedResource(uiApplication);
+                context.addManagedResources(uiApplicationFinalState);
+
                 uiApplication.setName("infra_ui");
                 uiApplication.setDescription("UI service");
 
@@ -276,25 +284,29 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
                 uiApplicationDefinition.setEntrypoint(new ArrayList<>());
                 uiApplicationDefinition.setCommand("/app/bin/foilen-infra-ui --debug");
 
-                context.getManagedResources().add(uiApplication);
-
+                uiApplicationFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON, LinkTypeConstants.RUN_AS);
                 for (Machine machine : uiMachines) {
-                    changes.linkAdd(uiApplication, LinkTypeConstants.INSTALLED_ON, machine);
+                    uiApplicationFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, machine);
                 }
-                changes.linkAdd(uiApplication, LinkTypeConstants.RUN_AS, uiUnixUser);
+                uiApplicationFinalState.addLinkTo(LinkTypeConstants.RUN_AS, uiUnixUser);
 
                 // UI Website
                 Website uiWebsite = new Website("infra_ui");
+                FinalStateManagedResource uiWebsiteFinalState = new FinalStateManagedResource();
+                uiWebsiteFinalState.setManagedResource(uiWebsite);
+                context.addManagedResources(uiWebsiteFinalState);
+
                 uiWebsite.setApplicationEndpoint(DockerContainerEndpoints.HTTP_TCP);
                 uiWebsite.getDomainNames().add(infraConfig.getUiDomainName());
                 uiWebsite.setHttps(uiIsHttps);
-                context.getManagedResources().add(uiWebsite);
-                changes.linkAdd(uiWebsite, LinkTypeConstants.POINTS_TO, uiApplication);
+
+                uiWebsiteFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON, LinkTypeConstants.POINTS_TO, LinkTypeConstants.USES);
+                uiWebsiteFinalState.addLinkTo(LinkTypeConstants.POINTS_TO, uiApplication);
                 if (uiIsHttps) {
-                    changes.linkAdd(uiWebsite, LinkTypeConstants.USES, uiWebsiteCertificates.get(0));
+                    uiWebsiteFinalState.addLinkTo(LinkTypeConstants.USES, uiWebsiteCertificates.get(0));
                 }
                 for (Machine uiMachine : uiMachines) {
-                    changes.linkAdd(uiWebsite, LinkTypeConstants.INSTALLED_ON, uiMachine);
+                    uiWebsiteFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, uiMachine);
                 }
 
             }
@@ -303,9 +315,6 @@ public class InfraConfigUpdateHandler extends AbstractCommonMethodUpdateEventHan
             logger.info("Missing some parameters. Will not create the applications");
         }
 
-        if (infraConfigNeedsUpdate) {
-            changes.resourceUpdate(infraConfig.getInternalId(), infraConfig);
-        }
     }
 
     private boolean hasAllPropertiesSet(InfraConfig infraConfig, //
