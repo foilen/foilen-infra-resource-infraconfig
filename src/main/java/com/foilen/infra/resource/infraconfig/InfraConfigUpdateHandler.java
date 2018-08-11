@@ -132,10 +132,10 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
                 infraLoginConfig.setCsrfSalt(infraConfig.getLoginCsrfSalt());
 
                 infraLoginConfig.setFromEmail(infraConfig.getLoginEmailFrom());
-                infraLoginConfig.setMailHost(infraConfig.getLoginMailHost());
-                infraLoginConfig.setMailPort(infraConfig.getLoginMailPort());
-                infraLoginConfig.setMailUsername(infraConfig.getLoginMailUsername());
-                infraLoginConfig.setMailPassword(infraConfig.getLoginMailPassword());
+                infraLoginConfig.setMailHost(infraConfig.getMailHost());
+                infraLoginConfig.setMailPort(infraConfig.getMailPort());
+                infraLoginConfig.setMailUsername(infraConfig.getMailUsername());
+                infraLoginConfig.setMailPassword(infraConfig.getMailPassword());
 
                 boolean loginIsHttps = !loginWebsiteCertificates.isEmpty();
                 infraLoginConfig.setLoginBaseUrl((loginIsHttps ? "https://" : "http://") + infraConfig.getLoginDomainName());
@@ -215,10 +215,10 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
                 infraUiConfig.setMysqlDatabaseUserName(uiMariaDBUser.getName());
                 infraUiConfig.setMysqlDatabasePassword(uiMariaDBUser.getPassword());
 
-                infraUiConfig.setMailHost(infraConfig.getLoginMailHost());
-                infraUiConfig.setMailPort(infraConfig.getLoginMailPort());
-                infraUiConfig.setMailUsername(infraConfig.getLoginMailUsername());
-                infraUiConfig.setMailPassword(infraConfig.getLoginMailPassword());
+                infraUiConfig.setMailHost(infraConfig.getMailHost());
+                infraUiConfig.setMailPort(infraConfig.getMailPort());
+                infraUiConfig.setMailUsername(infraConfig.getMailUsername());
+                infraUiConfig.setMailPassword(infraConfig.getMailPassword());
 
                 infraUiConfig.setMailFrom(infraConfig.getUiEmailFrom());
                 infraUiConfig.setMailAlertsTo(infraConfig.getUiAlertsToEmail());

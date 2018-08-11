@@ -117,26 +117,6 @@ public class InfraConfig extends AbstractIPResource {
         return loginEmailFrom;
     }
 
-    @Deprecated
-    public String getLoginMailHost() {
-        return mailHost;
-    }
-
-    @Deprecated
-    public String getLoginMailPassword() {
-        return mailPassword;
-    }
-
-    @Deprecated
-    public int getLoginMailPort() {
-        return mailPort;
-    }
-
-    @Deprecated
-    public String getLoginMailUsername() {
-        return mailUsername;
-    }
-
     public String getLoginVersion() {
         return loginVersion;
     }
@@ -218,26 +198,6 @@ public class InfraConfig extends AbstractIPResource {
 
     public void setLoginEmailFrom(String loginEmailFrom) {
         this.loginEmailFrom = loginEmailFrom;
-    }
-
-    @Deprecated
-    public void setLoginMailHost(String loginMailHost) {
-        this.mailHost = loginMailHost;
-    }
-
-    @Deprecated
-    public void setLoginMailPassword(String loginMailPassword) {
-        this.mailPassword = loginMailPassword;
-    }
-
-    @Deprecated
-    public void setLoginMailPort(int loginMailPort) {
-        this.mailPort = loginMailPort;
-    }
-
-    @Deprecated
-    public void setLoginMailUsername(String loginMailUsername) {
-        this.mailUsername = loginMailUsername;
     }
 
     public void setLoginVersion(String loginVersion) {
