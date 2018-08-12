@@ -31,6 +31,7 @@ import com.foilen.infra.resource.mariadb.MariaDBDatabase;
 import com.foilen.infra.resource.mariadb.MariaDBServer;
 import com.foilen.infra.resource.mariadb.MariaDBUser;
 import com.foilen.infra.resource.unixuser.UnixUser;
+import com.foilen.infra.resource.urlredirection.UrlRedirection;
 import com.foilen.infra.resource.webcertificate.WebsiteCertificate;
 import com.foilen.infra.resource.website.Website;
 import com.foilen.smalltools.tools.CollectionsTools;
@@ -43,7 +44,7 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
     @Override
     protected void commonHandlerExecute(CommonServicesContext services, FinalStateManagedResourcesUpdateEventHandlerContext<InfraConfig> context) {
 
-        context.addManagedResourceTypes(Application.class, Website.class);
+        context.addManagedResourceTypes(Application.class, UrlRedirection.class, Website.class);
 
         InfraConfig infraConfig = context.getResource();
 
@@ -196,6 +197,21 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
                     loginWebsiteFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, loginMachine);
                 }
 
+                // Add UrlRedirection from http to https
+                if (loginIsHttps) {
+                    FinalStateManagedResource urlRedirectionFinalState = new FinalStateManagedResource();
+
+                    UrlRedirection urlRedirection = new UrlRedirection();
+                    urlRedirection.setDomainName(infraConfig.getLoginDomainName());
+                    urlRedirection.setHttpRedirectToUrl("https://" + infraConfig.getLoginDomainName());
+                    urlRedirectionFinalState.setManagedResource(urlRedirection);
+
+                    urlRedirectionFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON);
+                    loginMachines.forEach(machine -> urlRedirectionFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, machine));
+
+                    context.addManagedResources(urlRedirectionFinalState);
+                }
+
                 // Prepare the UI config
                 MariaDBServer uiMariaDBServer = uiMariaDBServers.get(0);
                 String uiMariaDBServerMachine = resourceService.linkFindAllByFromResourceAndLinkTypeAndToResourceClass(uiMariaDBServer, LinkTypeConstants.INSTALLED_ON, Machine.class).get(0).getName();
@@ -309,6 +325,21 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
                 }
                 for (Machine uiMachine : uiMachines) {
                     uiWebsiteFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, uiMachine);
+                }
+
+                // Add UrlRedirection from http to https
+                if (uiIsHttps) {
+                    FinalStateManagedResource urlRedirectionFinalState = new FinalStateManagedResource();
+
+                    UrlRedirection urlRedirection = new UrlRedirection();
+                    urlRedirection.setDomainName(infraConfig.getUiDomainName());
+                    urlRedirection.setHttpRedirectToUrl("https://" + infraConfig.getUiDomainName());
+                    urlRedirectionFinalState.setManagedResource(urlRedirection);
+
+                    urlRedirectionFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON);
+                    uiMachines.forEach(machine -> urlRedirectionFinalState.addLinkTo(LinkTypeConstants.INSTALLED_ON, machine));
+
+                    context.addManagedResources(urlRedirectionFinalState);
                 }
 
             }

@@ -146,6 +146,12 @@
       "to" : "Application | infra_ui | UI service"
     }, {
       "type" : "MANAGES",
+      "to" : "UrlRedirection | login.example.com | Redirection to https://login.example.com"
+    }, {
+      "type" : "MANAGES",
+      "to" : "UrlRedirection | ui.example.com | Redirection to https://ui.example.com"
+    }, {
+      "type" : "MANAGES",
       "to" : "Website | infra_login | login.example.com"
     }, {
       "type" : "MANAGES",
@@ -273,6 +279,28 @@
     "links" : [ ],
     "tags" : [ ],
     "contentInJson" : "{\n  \"hashedPassword\" : null,\n  \"homeFolder\" : \"/home/ui\",\n  \"id\" : 2002,\n  \"name\" : \"ui\",\n  \"resourceCategory\" : \"INFRASTRUCTURE\",\n  \"resourceDescription\" : \"/home/ui\",\n  \"resourceEditorName\" : \"Unix User\",\n  \"resourceName\" : \"ui\",\n  \"shell\" : \"/bin/bash\"\n}"
+  }, {
+    "resource" : "UrlRedirection | login.example.com | Redirection to https://login.example.com",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "MANAGES",
+      "to" : "DnsPointer | login.example.com | login.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"domainName\" : \"login.example.com\",\n  \"httpIsPermanent\" : false,\n  \"httpRedirectToUrl\" : \"https://login.example.com\",\n  \"httpsIsPermanent\" : false,\n  \"httpsRedirectToUrl\" : null,\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Redirection to https://login.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"login.example.com\"\n}"
+  }, {
+    "resource" : "UrlRedirection | ui.example.com | Redirection to https://ui.example.com",
+    "links" : [ {
+      "type" : "INSTALLED_ON",
+      "to" : "Machine | m1.example.com | m1.example.com (127.0.0.1)"
+    }, {
+      "type" : "MANAGES",
+      "to" : "DnsPointer | ui.example.com | ui.example.com"
+    } ],
+    "tags" : [ ],
+    "contentInJson" : "{\n  \"domainName\" : \"ui.example.com\",\n  \"httpIsPermanent\" : false,\n  \"httpRedirectToUrl\" : \"https://ui.example.com\",\n  \"httpsIsPermanent\" : false,\n  \"httpsRedirectToUrl\" : null,\n  \"resourceCategory\" : \"NET\",\n  \"resourceDescription\" : \"Redirection to https://ui.example.com\",\n  \"resourceEditorName\" : null,\n  \"resourceName\" : \"ui.example.com\"\n}"
   }, {
     "resource" : "Website | infra_login | login.example.com",
     "links" : [ {
