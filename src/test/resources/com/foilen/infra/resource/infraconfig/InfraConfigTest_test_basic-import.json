@@ -38,15 +38,19 @@
   }, {
     "resourceType" : "Unix User",
     "resourceName" : "login",
-    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/login\",\"id\":2001,\"name\":\"login\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/login\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"login\",\"shell\":\"/bin/bash\"}"
+    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/login\",\"id\":72001,\"name\":\"login\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/login\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"login\",\"shell\":\"/bin/bash\"}"
   }, {
     "resourceType" : "Unix User",
     "resourceName" : "mariadb",
-    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/mariadb\",\"id\":2000,\"name\":\"mariadb\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/mariadb\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"mariadb\",\"shell\":\"/bin/bash\"}"
+    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/mariadb\",\"id\":72000,\"name\":\"mariadb\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/mariadb\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"mariadb\",\"shell\":\"/bin/bash\"}"
   }, {
     "resourceType" : "Unix User",
     "resourceName" : "ui",
-    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/ui\",\"id\":2002,\"name\":\"ui\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/ui\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"ui\",\"shell\":\"/bin/bash\"}"
+    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/ui\",\"id\":72002,\"name\":\"ui\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/ui\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"ui\",\"shell\":\"/bin/bash\"}"
+  }, {
+    "resourceType" : "Unix User",
+    "resourceName" : "infra_url_redirection",
+    "resourceJson" : "{\"hashedPassword\":null,\"homeFolder\":\"/home/infra_url_redirection\",\"id\":72003,\"name\":\"infra_url_redirection\",\"resourceCategory\":\"INFRASTRUCTURE\",\"resourceDescription\":\"/home/infra_url_redirection\",\"resourceEditorName\":\"Unix User\",\"resourceName\":\"infra_url_redirection\",\"shell\":\"/bin/bash\"}"
   }, {
     "resourceType" : "Website Certificate",
     "resourceName" : "login.example.com",
