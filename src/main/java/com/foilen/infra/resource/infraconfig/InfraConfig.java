@@ -66,6 +66,7 @@ public class InfraConfig extends AbstractIPResource {
     public static final String PROPERTY_UI_CSRF_SALT = "uiCsrfSalt";
     public static final String PROPERTY_UI_LOGIN_COOKIE_SIGNATURE_SALT = "uiLoginCookieSignatureSalt";
     public static final String PROPERTY_UI_VERSION = "uiVersion";
+    public static final String PROPERTY_UI_DEBUG = "uiDebug";
 
     // Common
     private String applicationId;
@@ -89,6 +90,7 @@ public class InfraConfig extends AbstractIPResource {
     private String uiCsrfSalt;
     private String uiLoginCookieSignatureSalt;
     private String uiVersion;
+    private boolean uiDebug;
 
     public InfraConfig() {
     }
@@ -176,6 +178,10 @@ public class InfraConfig extends AbstractIPResource {
         return uiVersion;
     }
 
+    public boolean isUiDebug() {
+        return uiDebug;
+    }
+
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
     }
@@ -226,6 +232,10 @@ public class InfraConfig extends AbstractIPResource {
 
     public void setUiCsrfSalt(String uiCsrfSalt) {
         this.uiCsrfSalt = uiCsrfSalt;
+    }
+
+    public void setUiDebug(boolean uiDebug) {
+        this.uiDebug = uiDebug;
     }
 
     public void setUiDomainName(String uiDomainName) {

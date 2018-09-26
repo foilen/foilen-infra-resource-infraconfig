@@ -113,6 +113,11 @@ public class InfraConfigEditor extends SimpleResourceEditor<InfraConfig> {
             fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
             fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
         });
+        // TODO +++ junit- set to true
+        simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_UI_DEBUG, fieldConfig -> {
+            fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
+            fieldConfig.addFormator(value -> "true".equalsIgnoreCase(value) ? "true" : "false");
+        });
 
         simpleResourceEditorDefinition.addResource("uiWebsiteCertificate", InfraConfig.LINK_TYPE_UI_USES, WebsiteCertificate.class);
         simpleResourceEditorDefinition.addResources("uiMachines", InfraConfig.LINK_TYPE_UI_INSTALLED_ON, Machine.class);

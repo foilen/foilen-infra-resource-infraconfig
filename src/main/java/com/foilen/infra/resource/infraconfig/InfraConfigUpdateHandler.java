@@ -300,7 +300,11 @@ public class InfraConfigUpdateHandler extends AbstractFinalStateManagedResources
 
                 uiApplicationDefinition.setRunAs(uiUnixUser.getId());
                 uiApplicationDefinition.setEntrypoint(new ArrayList<>());
-                uiApplicationDefinition.setCommand("/app/bin/foilen-infra-ui --debug");
+                String command = "/app/bin/foilen-infra-ui";
+                if (infraConfig.isUiDebug()) {
+                    command += " --debug";
+                }
+                uiApplicationDefinition.setCommand(command);
 
                 uiApplicationFinalState.addManagedLinksToType(LinkTypeConstants.INSTALLED_ON, LinkTypeConstants.RUN_AS);
                 for (Machine machine : uiMachines) {

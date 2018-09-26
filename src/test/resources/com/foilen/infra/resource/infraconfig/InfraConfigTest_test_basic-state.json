@@ -957,6 +957,7 @@ backend http_8080_ui.example.com
       "resourceName" : "Infrastructure Configuration",
       "uiAlertsToEmail" : "alertsui@example.com",
       "uiCsrfSalt" : "ZZZYYYXXX",
+      "uiDebug" : true,
       "uiDomainName" : "ui.example.com",
       "uiEmailFrom" : "fromui@example.com",
       "uiLoginCookieSignatureSalt" : "WWWVVVUUU",
