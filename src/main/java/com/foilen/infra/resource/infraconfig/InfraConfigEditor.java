@@ -113,7 +113,6 @@ public class InfraConfigEditor extends SimpleResourceEditor<InfraConfig> {
             fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
             fieldConfig.addValidator(CommonValidation::validateNotNullOrEmpty);
         });
-        // TODO +++ junit- set to true
         simpleResourceEditorDefinition.addInputText(InfraConfig.PROPERTY_UI_DEBUG, fieldConfig -> {
             fieldConfig.addFormator(CommonFormatting::trimSpacesAround);
             fieldConfig.addFormator(value -> "true".equalsIgnoreCase(value) ? "true" : "false");
