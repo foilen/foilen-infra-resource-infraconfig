@@ -474,6 +474,7 @@ btahMD33W123sboJJIcvIDjnMxH0z8IGIltyLARl4BjDKrIy3tj2NleDxUCXl3/4
 5M65wcaFxjAIbSonGw4Rgtl50U/5MOe7pbrd1bJZrZhMzu0CaZsULlKI0nppog4g
 4bqT/INCICc3UmtNeyIhE3csWC/UrsOSCqKV8KAVMalJRBKRafqq
 -----END CERTIFICATE-----
+
 -----BEGIN RSA PRIVATE KEY-----
 MIIJKQIBAAKCAgEAmD6+w8GwggdZtnVa5LTT9cpgITPaOU+pLhNLCweWn+iJueyN
 c1sVzzbA92gPBDx9+pr4aoJyhF/CMxu5hBygm0I5oNNbFEcGkVELEIfhb9uSNRem
@@ -525,6 +526,7 @@ cMLJ9uMqiQnuDIWzuAS/+UDYsySvi96aQAA77zSrIFbt69K5QNcnQK1QkVRY03Ox
 ZWADcDYnlF3qpfApJidHGiQU4IY1v4uE/94DYt19gdgw8qRhmE3JhYKSFlHy2mVy
 Xl5If2hhOsrtoklm4Y5WkqPIt9tL1ZbjYqBdm9QC1kZavplBqSZNrTyKkHj6
 -----END RSA PRIVATE KEY-----
+
 "
           }, {
             "a" : "/certs/ui.example.com.pem",
@@ -556,6 +558,7 @@ H2IploDhmp72dyQMt/3Oqu23oLOFV4f1r3qd0zkzQ06OwcdJEKXuXQTypkqH30wa
 VlhC4/4a2C/9Svd50JhQuUaaExqCzo3mthBnd22bmrHvDbcTCygYNxozTdMbvWlr
 uv3kL4JTDKv2nqgWokl+v6iM2Y1EuNxnKt7hvG7C
 -----END CERTIFICATE-----
+
 -----BEGIN RSA PRIVATE KEY-----
 MIIJKAIBAAKCAgEArUAJhkOYtQQXx1bCZ05EbzdXjOSHwxc8yeaOiBBzGJqYLPbA
 OnSwXR6qdgeJzFjkGkN2ue5lRM8RM7bAvWOvJVrRT1MnKg2hD311WdyIwfr/uWk5
@@ -607,6 +610,7 @@ Y7H54x8NJXLCKUK8/U4FsYxbt8aL3i0U5l2KppHa3Sr8Hs9eRVwPakQgGNtB5ncG
 PNJMQDwdEz8IibVOFeMQ8EPKbh47imQl17BPoDVU0DKRtOYfCuV+fqNCdBE5ECpT
 qxwNEWG0PCJmb9uOGYxtRmotVVD2hafyQzOXHwfeHaW2ZsKvkW+nmxw1m5w=
 -----END RSA PRIVATE KEY-----
+
 "
           }, {
             "a" : "/haproxy.cfg",
@@ -619,6 +623,7 @@ defaults
   timeout connect 5000
   timeout client 600000
   timeout server 600000
+  timeout tunnel 600000
 
 frontend port_4433
   mode http
@@ -737,10 +742,7 @@ backend http_8080_ui.example.com
     }
   }, {
     "resource" : "DnsEntry | login.example.com / A | 127.0.0.1",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | login.example.com | Domain for login.example.com"
-    } ],
+    "links" : [ ],
     "tags" : [ ],
     "content" : {
       "details" : "127.0.0.1",
@@ -753,10 +755,7 @@ backend http_8080_ui.example.com
     }
   }, {
     "resource" : "DnsEntry | m1.example.com / A | 127.0.0.1",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | m1.example.com | Domain for m1.example.com"
-    } ],
+    "links" : [ ],
     "tags" : [ ],
     "content" : {
       "details" : "127.0.0.1",
@@ -769,10 +768,7 @@ backend http_8080_ui.example.com
     }
   }, {
     "resource" : "DnsEntry | ui.example.com / A | 127.0.0.1",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | ui.example.com | Domain for ui.example.com"
-    } ],
+    "links" : [ ],
     "tags" : [ ],
     "content" : {
       "details" : "127.0.0.1",
@@ -816,63 +812,6 @@ backend http_8080_ui.example.com
       "resourceCategory" : "NET",
       "resourceDescription" : "ui.example.com",
       "resourceName" : "ui.example.com"
-    }
-  }, {
-    "resource" : "Domain | example.com | Domain for example.com",
-    "links" : [ ],
-    "tags" : [ ],
-    "content" : {
-      "meta" : { },
-      "name" : "example.com",
-      "resourceCategory" : "NET",
-      "resourceDescription" : "Domain for example.com",
-      "resourceName" : "example.com",
-      "reverseName" : "com.example"
-    }
-  }, {
-    "resource" : "Domain | login.example.com | Domain for login.example.com",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | example.com | Domain for example.com"
-    } ],
-    "tags" : [ ],
-    "content" : {
-      "meta" : { },
-      "name" : "login.example.com",
-      "resourceCategory" : "NET",
-      "resourceDescription" : "Domain for login.example.com",
-      "resourceName" : "login.example.com",
-      "reverseName" : "com.example.login"
-    }
-  }, {
-    "resource" : "Domain | m1.example.com | Domain for m1.example.com",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | example.com | Domain for example.com"
-    } ],
-    "tags" : [ ],
-    "content" : {
-      "meta" : { },
-      "name" : "m1.example.com",
-      "resourceCategory" : "NET",
-      "resourceDescription" : "Domain for m1.example.com",
-      "resourceName" : "m1.example.com",
-      "reverseName" : "com.example.m1"
-    }
-  }, {
-    "resource" : "Domain | ui.example.com | Domain for ui.example.com",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | example.com | Domain for example.com"
-    } ],
-    "tags" : [ ],
-    "content" : {
-      "meta" : { },
-      "name" : "ui.example.com",
-      "resourceCategory" : "NET",
-      "resourceDescription" : "Domain for ui.example.com",
-      "resourceName" : "ui.example.com",
-      "reverseName" : "com.example.ui"
     }
   }, {
     "resource" : "InfraConfig | Infrastructure Configuration | Basic Infrastructure (login and UI)",
@@ -1327,10 +1266,7 @@ backend http_8080_ui.example.com
     }
   }, {
     "resource" : "WebsiteCertificate | login.example.com | 3db0fbf94792b7eb21db1652e0566f7d2b5904e9, 2018-06-13, 2018-07-13",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | login.example.com | Domain for login.example.com"
-    } ],
+    "links" : [ ],
     "tags" : [ ],
     "content" : {
       "certificate" : "-----BEGIN CERTIFICATE-----
@@ -1439,10 +1375,7 @@ TdGzmRMJLXmsOo78DhgAYHcCAwEAAQ==
     }
   }, {
     "resource" : "WebsiteCertificate | ui.example.com | 1fed8dd4eea2f20d4f89776eb9b7a67dd7f4a629, 2018-06-13, 2018-07-13",
-    "links" : [ {
-      "type" : "MANAGES",
-      "to" : "Domain | ui.example.com | Domain for ui.example.com"
-    } ],
+    "links" : [ ],
     "tags" : [ ],
     "content" : {
       "certificate" : "-----BEGIN CERTIFICATE-----
