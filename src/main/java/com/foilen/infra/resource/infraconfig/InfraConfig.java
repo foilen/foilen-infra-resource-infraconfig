@@ -41,6 +41,8 @@ import com.foilen.infra.plugin.v1.model.resource.InfraPluginResourceCategory;
  */
 public class InfraConfig extends AbstractIPResource {
 
+    public static final String RESOURCE_TYPE = "Infrastructure Configuration";
+
     public static final String LINK_TYPE_LOGIN_INSTALLED_ON = "LOGIN_INSTALLED_ON";
     public static final String LINK_TYPE_LOGIN_USES = "LOGIN_USES";
 

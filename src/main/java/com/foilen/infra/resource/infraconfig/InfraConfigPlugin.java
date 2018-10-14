@@ -18,6 +18,8 @@ import com.google.common.base.Strings;
  */
 public class InfraConfigPlugin extends AbstractIPResource {
 
+    public static final String RESOURCE_TYPE = "Infrastructure Plugin";
+
     public static final String PROPERTY_URL = "url";
     public static final String PROPERTY_SHA512 = "sha512";
 
